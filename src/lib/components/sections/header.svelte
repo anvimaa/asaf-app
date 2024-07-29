@@ -12,6 +12,7 @@
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 	import { Input } from '$lib/components/ui/input/index.js';
 	import * as Sheet from '$lib/components/ui/sheet/index.js';
+	import ThemeDropdown from '../elements/theme-dropdown.svelte';
 </script>
 
 <header class="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
@@ -82,6 +83,7 @@
 			</div>
 		</form>
 	</div>
+	<ThemeDropdown />
 	<DropdownMenu.Root>
 		<DropdownMenu.Trigger asChild let:builder>
 			<Button builders={[builder]} variant="secondary" size="icon" class="rounded-full">
