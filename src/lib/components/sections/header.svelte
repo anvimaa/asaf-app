@@ -3,7 +3,7 @@
 	import Package from 'lucide-svelte/icons/package';
 	import ShoppingCart from 'lucide-svelte/icons/shopping-cart';
 	import Menu from 'lucide-svelte/icons/menu';
-	import { Package2, Home, LineChart } from 'lucide-svelte';
+	import { Package2, Home, LineChart, LogOut } from 'lucide-svelte';
 	import Search from 'lucide-svelte/icons/search';
 	import Users from 'lucide-svelte/icons/users';
 
@@ -13,6 +13,8 @@
 	import { Input } from '$lib/components/ui/input/index.js';
 	import * as Sheet from '$lib/components/ui/sheet/index.js';
 	import ThemeDropdown from '../elements/theme-dropdown.svelte';
+
+	export let user: any;
 </script>
 
 <header class="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
@@ -88,16 +90,21 @@
 		<DropdownMenu.Trigger asChild let:builder>
 			<Button builders={[builder]} variant="secondary" size="icon" class="rounded-full">
 				<CircleUser class="h-5 w-5" />
-				<span class="sr-only">Toggle user menu</span>
+				<span class="sr-only">Menu Meu Perfil</span>
 			</Button>
 		</DropdownMenu.Trigger>
 		<DropdownMenu.Content align="end">
-			<DropdownMenu.Label>My Account</DropdownMenu.Label>
+			<DropdownMenu.Label><b>{user.name}</b></DropdownMenu.Label>
 			<DropdownMenu.Separator />
-			<DropdownMenu.Item>Settings</DropdownMenu.Item>
-			<DropdownMenu.Item>Support</DropdownMenu.Item>
+			<DropdownMenu.Item>Perfil</DropdownMenu.Item>
+			<DropdownMenu.Item>Ajuda</DropdownMenu.Item>
 			<DropdownMenu.Separator />
-			<DropdownMenu.Item>Logout</DropdownMenu.Item>
+			<DropdownMenu.Item>
+				<a href="/logout" class="flex items-center justify-between gap-2">
+					<LogOut />
+					Terminar Sessão
+				</a>
+			</DropdownMenu.Item>
 		</DropdownMenu.Content>
 	</DropdownMenu.Root>
 </header>
