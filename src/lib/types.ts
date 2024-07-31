@@ -12,8 +12,9 @@ export interface Stat {
 }
 
 export interface Transation {
-    title: string;
-    content: string;
+    name: string;
+    email: string;
+    operation: string;
     status: string;
     date: Date;
 }

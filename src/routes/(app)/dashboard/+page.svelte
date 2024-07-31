@@ -5,7 +5,7 @@
 	import { Button } from '@/components/ui/button/index.js';
 	import * as Card from '@/components/ui/card/index.js';
 	import * as Table from '@/components/ui/table/index.js';
-	import { stats } from '@/constants';
+	import { stats, transations } from '@/constants';
 </script>
 
 <svelte:head>
@@ -59,17 +59,19 @@
 					</Table.Row>
 				</Table.Header>
 				<Table.Body>
-					<Table.Row>
-						<Table.Cell>
-							<div class="font-medium">Liam Johnson</div>
-							<div class="hidden text-sm text-muted-foreground md:inline">liam@example.com</div>
-						</Table.Cell>
-						<Table.Cell class="">Sale</Table.Cell>
-						<Table.Cell class="">
-							<Badge class="text-xs" variant="outline">Approved</Badge>
-						</Table.Cell>
-						<Table.Cell class="">2023-06-23</Table.Cell>
-					</Table.Row>
+					{#each transations as transation}
+						<Table.Row>
+							<Table.Cell>
+								<div class="font-medium">{transation.name}</div>
+								<div class="hidden text-sm text-muted-foreground md:inline">{transation.email}</div>
+							</Table.Cell>
+							<Table.Cell class="">{transation.operation}</Table.Cell>
+							<Table.Cell class="">
+								<Badge class="text-xs" variant="outline">{transation.status}</Badge>
+							</Table.Cell>
+							<Table.Cell class="">{transation.date.toLocaleDateString()}</Table.Cell>
+						</Table.Row>
+					{/each}
 				</Table.Body>
 			</Table.Root>
 		</Card.Content>

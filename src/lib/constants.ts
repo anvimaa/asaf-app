@@ -1,5 +1,5 @@
 import { Users } from "lucide-svelte";
-import type { Stat } from "./types";
+import type { Stat, Transation } from "./types";
 
 export const stats: Stat[] = [
     {
@@ -9,3 +9,27 @@ export const stats: Stat[] = [
         icon: Users
     }
 ];
+
+export const transations: Transation[] = [
+    {
+        name: 'John Doe',
+        email: 'pC8L2@example.com',
+        operation: 'Credito',
+        status: 'Aprovado',
+        date: new Date()
+    }
+    , {
+        name: 'John Doe',
+        email: 'pC8L3@example.com',
+        operation: 'Debito',
+        status: 'Recusado',
+        date: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7)
+    }
+    , {
+        name: 'Jane Doe',
+        email: 'pC8L4@example.com',
+        operation: 'Transferencia',
+        status: 'Pendente',
+        date: new Date(Date.now() - 1000 * 60 * 60 * 24 * 895)
+    }
+]

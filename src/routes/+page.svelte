@@ -2,4 +2,5 @@
 	import Table from '@/components/elements/table.svelte';
 </script>
 
-<Table></Table>
+<h1>Pagina inicial</h1>
+<a href="/dashboard">Painel</a>
