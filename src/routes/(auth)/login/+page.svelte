@@ -3,8 +3,11 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { Input } from '$lib/components/ui/input/index.js';
 	import { Label } from '$lib/components/ui/label/index.js';
+	import Alert from '@/components/elements/alert.svelte';
 	import type { ActionData } from './$types';
-	export let data: ActionData;
+	export let form: ActionData;
+
+	$: console.log(form);
 </script>
 
 <svelte:head>
@@ -13,7 +16,7 @@
 
 <div class="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
 	<div class="flex items-center justify-center py-12">
-		<div class="mx-auto grid w-[350px] gap-6">
+		<div class="mx-auto grid gap-6">
 			<div class="grid gap-2 text-center">
 				<h1 class="text-3xl font-bold">Iniciar Sessão</h1>
 				<p class="text-balance text-muted-foreground">
@@ -21,8 +24,8 @@
 				</p>
 			</div>
 			<form method="post" use:enhance>
-				{#if data?.message}
-					<p>{data.message}</p>
+				{#if form?.message}
+					<Alert message={form.message} title="Atenção" variant="destructive" />
 				{/if}
 				<div class="grid gap-4">
 					<div class="grid gap-2">
