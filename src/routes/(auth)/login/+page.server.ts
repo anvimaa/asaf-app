@@ -4,6 +4,7 @@ import { Argon2id } from "oslo/password";
 import { db } from "$lib/server/db";
 
 import type { Actions, PageServerLoad } from "./$types";
+import { sendSMS } from "@/server/vonage";
 
 export const load: PageServerLoad = async (event) => {
   if (event.locals.user) {
@@ -66,7 +67,7 @@ export const actions: Actions = {
       ...sessionCookie.attributes,
     });
 
-
+    const res = await sendSMS("244934342795", "Login Iniciado Com Sucesso.")
     return redirect(302, "/dashboard");
   },
 };
