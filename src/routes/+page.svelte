@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Table from '@/components/elements/table.svelte';
+	import Table from '@/components/elements/table/table.svelte';
 </script>
 
 <h1>Pagina inicial</h1>

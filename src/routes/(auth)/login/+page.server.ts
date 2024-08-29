@@ -67,7 +67,7 @@ export const actions: Actions = {
       ...sessionCookie.attributes,
     });
 
-    const res = await sendSMS("244934342795", "Login Iniciado Com Sucesso.")
+    //const res = await sendSMS("244934342795", "Login Iniciado Com Sucesso.")
     return redirect(302, "/dashboard");
   },
 };
