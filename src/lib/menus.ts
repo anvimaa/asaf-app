@@ -1,4 +1,4 @@
-import { LayoutDashboard, User } from "lucide-svelte";
+import { LayoutDashboard, Package, User } from "lucide-svelte";
 import type { ItemMenu } from "./types";
 
 export const app_menu: ItemMenu[] = [
@@ -8,8 +8,8 @@ export const app_menu: ItemMenu[] = [
         icon: LayoutDashboard,
     },
     {
-        label: "Asegurados",
-        href: "/asegurados",
-        icon: User,
+        label: "Categorias",
+        href: "/categories",
+        icon: Package,
     },
 ]

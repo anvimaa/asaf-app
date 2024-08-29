@@ -34,6 +34,8 @@
 	"dependencies": {
 		"@lucia-auth/adapter-prisma": "^4.0.1",
 		"@prisma/client": "5.17.0",
+		"@tanstack/match-sorter-utils": "^8.19.4",
+		"@tanstack/svelte-table": "^8.20.5",
 		"@vonage/server-sdk": "^3.16.0",
 		"bits-ui": "^0.21.12",
 		"clsx": "^2.1.1",
