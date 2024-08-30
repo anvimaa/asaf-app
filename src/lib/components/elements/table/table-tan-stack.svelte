@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { writable } from 'svelte/store';
-	import { selectedItems } from '$lib/stores';
+	import { selectedItems } from '@/stores';
 
-	import * as Table from '$lib/components/ui/table/index.js';
-	import { Input } from '$lib/components/ui/input/index.js';
-	import * as Select from '$lib/components/ui/select';
-	import { Button } from '$lib/components/ui/button/index.js';
+	import * as Table from '@/components/ui/table';
+	import { Input } from '@/components/ui/input';
+	import * as Select from '@/components/ui/select';
+	import { Button } from '@/components/ui/button';
 
 	import {
 		createSvelteTable,
@@ -36,11 +36,13 @@
 		FileText,
 		Printer,
 		RefreshCw,
+		Search,
 		SearchIcon
 	} from 'lucide-svelte';
 
 	let globalFilter = '';
 	let pageSizes = [1, 5, 10, 25, 50, 100];
+
 	export let itens: any[] = [];
 	export let columns: ColumnDef<any>[];
 	export let showPrinter: boolean = false;
@@ -211,22 +213,17 @@
 			</button>
 		</div>
 
-		<label
-			class="input file:input-bordered flex flex-1 items-center gap-2 border-zinc-400 bg-zinc-100 dark:border-neutral-600 dark:bg-neutral-800"
-		>
-			<input
-				type="text"
+		<div class="relative w-full flex-1">
+			<Search class="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+			<Input
+				type="search"
 				placeholder="Pesquisar"
-				class="w-full p-1"
+				class="w-full appearance-none bg-background pl-8 shadow-none"
 				bind:value={globalFilter}
 				on:keyup={handleKeyUp}
 			/>
-
-			<SearchIcon class="h-4 w-4" />
-		</label>
+		</div>
 	</div>
-
-	<div class="divider"></div>
 
 	<div class="relative overflow-x-auto">
 		<Table.Root>
