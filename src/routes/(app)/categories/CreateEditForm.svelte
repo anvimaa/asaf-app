@@ -1,18 +1,14 @@
 <script lang="ts">
-	import { Button } from '$lib/components/ui/button/index.js';
-	import * as Card from '$lib/components/ui/card/index.js';
-	import { Input } from '$lib/components/ui/input/index.js';
-	import { Textarea } from '$lib/components/ui/textarea/index.js';
+	import { Button } from '@/components/ui/button';
+	import * as Card from '@/components/ui/card';
+	import { Input } from '@/components/ui/input';
+	import { Textarea } from '@/components/ui/textarea';
+	import { Label } from '@/components/ui/label';
 
-	import { Label } from '$lib/components/ui/label/index.js';
-
-	export let message: any;
 	export let errors: any;
 	export let form: any;
 	export let enhance: any;
 </script>
-
-{#if $message}<h3>{$message}</h3>{/if}
 
 <form method="POST" use:enhance>
 	<Card.Root
@@ -24,7 +20,7 @@
 			<Card.Description>Preencha todas as informações do formulário.</Card.Description>
 		</Card.Header>
 		<Card.Content>
-			<div class="flex w-full max-w-sm flex-col gap-1.5">
+			<div class="flex w-full flex-col gap-1.5">
 				<Label for="categoryName">Nome da Categoria</Label>
 				<Input
 					id="categoryName"
@@ -36,10 +32,11 @@
 					<p class="text-sm text-red-500">{$errors.categoryName}</p>
 				{/if}
 			</div>
-			<div class="flex w-full max-w-sm flex-col gap-1.5">
+			<div class="flex w-full flex-col gap-1.5">
 				<Label for="description">Descrição</Label>
 				<Textarea
 					id="description"
+					rows={15}
 					name="description"
 					bind:value={$form.description}
 					placeholder="Descrição da Categoria"

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button/index.js';
+	import { toast } from 'svelte-sonner';
 
 	import { superForm } from 'sveltekit-superforms';
 	import type { ActionData, PageData } from './$types';
@@ -18,17 +19,25 @@
 	const columns: ColumnDef<Category>[] = [
 		{
 			accessorFn: (row) => `${row.categoryName}`,
-			id: 'codigo',
-			header: 'Codigo',
+			id: 'Nome',
+			header: 'Nome',
 			cell: (info) => info.getValue()
 		},
 		{
 			accessorFn: (row) => `${row.description}`,
-			id: 'nome',
-			header: 'Nome',
+			id: 'Descrição',
+			header: 'Descrição',
 			cell: (info) => info.getValue()
 		}
 	];
+
+	$: if ($message) {
+		if ($message.type === 'error') {
+			toast.error($message.message);
+		} else {
+			toast.success($message.message);
+		}
+	}
 </script>
 
 <svelte:head>
@@ -37,7 +46,7 @@
 
 <div class="flex flex-col gap-y-4">
 	{#if isCreateOrEdit}
-		<CreateEditForm {enhance} {form} {message} {errors} on:click={() => (isCreateOrEdit = false)} />
+		<CreateEditForm {enhance} {form} {errors} on:click={() => (isCreateOrEdit = false)} />
 	{:else}
 		<div class="">
 			<Button class="font-bold text-white" on:click={() => (isCreateOrEdit = true)}>
@@ -45,8 +54,7 @@
 				Cadastrar {title}
 			</Button>
 		</div>
-		<h1>Tabela de {title}</h1>
-		<hr />
-		<TableTanStack {columns} itens={data.categories}></TableTanStack>
+
+		<TableTanStack {title} {columns} itens={data.categories}></TableTanStack>
 	{/if}
 </div>

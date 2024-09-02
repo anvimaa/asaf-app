@@ -24,10 +24,10 @@ export const actions: Actions = {
 
         try {
             await db.category.create({ data });
-            return message(form, 'Salvo com sucesso!');
+            return message(form, { type: 'success', message: 'Salvo com sucesso!' });
         } catch (error) {
             console.error(error);
-            return message(form, 'Erro ao Salvar');
+            return message(form, { type: 'error', message: 'Erro ao Salvar' });
         }
     }
 };
