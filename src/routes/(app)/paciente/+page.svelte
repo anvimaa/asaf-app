@@ -8,25 +8,25 @@
 	import { Plus } from 'lucide-svelte';
 	import TableTanStack from '@/components/elements/table/table-tan-stack.svelte';
 	import type { ColumnDef } from '@tanstack/svelte-table';
-	import type { Category } from '@prisma/client';
+	import type { Paciente } from '@prisma/client';
 
 	export let data: PageData;
 	const { form, errors, message, enhance } = superForm(data.form);
 
-	const title = 'Categoria';
+	const title = 'Paciente';
 	let isCreateOrEdit: boolean = false;
 
-	const columns: ColumnDef<Category>[] = [
+	const columns: ColumnDef<Paciente>[] = [
 		{
-			accessorFn: (row) => `${row.categoryName}`,
+			accessorFn: (row) => `${row.namo}`,
 			id: 'Nome',
 			header: 'Nome',
 			cell: (info) => info.getValue()
 		},
 		{
-			accessorFn: (row) => `${row.description}`,
-			id: 'Descrição',
-			header: 'Descrição',
+			accessorFn: (row) => `${row.genero}`,
+			id: 'Genero',
+			header: 'Genero',
 			cell: (info) => info.getValue()
 		}
 	];
@@ -55,6 +55,6 @@
 			</Button>
 		</div>
 
-		<TableTanStack {title} {columns} itens={data.categories}></TableTanStack>
+		<TableTanStack {title} {columns} itens={data.pacientes}></TableTanStack>
 	{/if}
 </div>

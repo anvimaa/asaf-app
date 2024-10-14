@@ -33,3 +33,5 @@ export const transations: Transation[] = [
         date: new Date(Date.now() - 1000 * 60 * 60 * 24 * 895)
     }
 ]
+
+export const generos: string[] = ["Masculino", "Femenino", "Outro"]

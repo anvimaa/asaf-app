@@ -8,8 +8,8 @@ export const app_menu: ItemMenu[] = [
         icon: LayoutDashboard,
     },
     {
-        label: "Categorias",
-        href: "/categories",
+        label: "Pacientes",
+        href: "/paciente",
         icon: Package,
     },
 ]
