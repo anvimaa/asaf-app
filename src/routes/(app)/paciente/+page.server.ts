@@ -24,11 +24,11 @@ export const actions: Actions = {
         const data = form.data
 
         try {
-            //await db.paciente.create({ data });
-            return message(form, { type: 'success', message: 'Salvo com sucesso!' });
+            const paciente = await db.paciente.create({ data: { ...data, dataNascimento: new Date(data.dataNascimento) } });
+            return message(form, { type: 'success', message: `${paciente.nome} Registrado com sucesso!` });
         } catch (error) {
             console.error(error);
-            return message(form, { type: 'error', message: 'Erro ao Salvar' });
+            return message(form, { type: 'error', message: 'Erro ao Registrar' });
         }
     }
 };

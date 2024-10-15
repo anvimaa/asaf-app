@@ -24,9 +24,27 @@
 			cell: (info) => info.getValue()
 		},
 		{
+			accessorFn: (row) => `${row.nif}`,
+			id: 'NIF',
+			header: 'NIF',
+			cell: (info) => info.getValue()
+		},
+		{
 			accessorFn: (row) => `${row.sexo}`,
 			id: 'Genero',
 			header: 'Genero',
+			cell: (info) => info.getValue()
+		},
+		{
+			accessorFn: (row) => `${row.area}`,
+			id: 'Área',
+			header: 'Área',
+			cell: (info) => info.getValue()
+		},
+		{
+			accessorFn: (row) => `${row.urgencia}`,
+			id: 'Urgência',
+			header: 'Urgência',
 			cell: (info) => info.getValue()
 		}
 	];

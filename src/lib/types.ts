@@ -6,7 +6,7 @@ export interface ItemMenu {
 
 export interface Stat {
     title: string;
-    content: string;
+    content: any;
     description: string;
     icon: any;
 }

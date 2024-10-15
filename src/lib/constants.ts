@@ -3,34 +3,33 @@ import type { Stat, Transation } from "./types";
 
 export const stats: Stat[] = [
     {
-        title: 'Assegurados',
-        content: '+1220',
-        description: '+20.1% from last month',
+        title: 'Pacientes',
+        content: 2,
+        description: 'Total de pacientes registrados',
+        icon: Users
+    },
+    {
+        title: 'Consultas',
+        content: 1,
+        description: 'Total de Consultas Registradas',
         icon: Users
     }
 ];
 
 export const transations: Transation[] = [
     {
-        name: 'John Doe',
-        email: 'pC8L2@example.com',
-        operation: 'Credito',
-        status: 'Aprovado',
+        name: 'Antonio...',
+        email: '936985457',
+        operation: 'Normal',
+        status: 'Triagem',
         date: new Date()
     }
     , {
-        name: 'John Doe',
-        email: 'pC8L3@example.com',
-        operation: 'Debito',
-        status: 'Recusado',
+        name: 'Maria...',
+        email: '925784521',
+        operation: 'Urgente',
+        status: 'Banco de Urgencia',
         date: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7)
-    }
-    , {
-        name: 'Jane Doe',
-        email: 'pC8L4@example.com',
-        operation: 'Transferencia',
-        status: 'Pendente',
-        date: new Date(Date.now() - 1000 * 60 * 60 * 24 * 895)
     }
 ]
 
