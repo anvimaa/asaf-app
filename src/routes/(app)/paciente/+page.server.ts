@@ -24,7 +24,7 @@ export const actions: Actions = {
         const data = form.data
 
         try {
-            await db.paciente.create({ data });
+            //await db.paciente.create({ data });
             return message(form, { type: 'success', message: 'Salvo com sucesso!' });
         } catch (error) {
             console.error(error);
