@@ -17,7 +17,7 @@ export const actions: Actions = {
         const form = await superValidate(request, zod(pacienteSchema));
 
         if (!form.valid) {
-            console.log(form.errors, form.data);
+            //console.log(form.errors, form.data);
             return fail(400, { form });
         }
 

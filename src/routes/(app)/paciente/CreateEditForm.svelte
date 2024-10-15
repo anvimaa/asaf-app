@@ -4,7 +4,7 @@
 	import { Input } from '@/components/ui/input';
 	import { Label } from '@/components/ui/label';
 
-	import { generos } from '@/constants';
+	import { generos, urgencias, areas } from '@/constants';
 	import SelectInput from '@/components/elements/form/SelectInput.svelte';
 	import DateTimeInput from '@/components/elements/form/DateTimeInput.svelte';
 
@@ -33,7 +33,7 @@
 				</div>
 
 				<div class="w-full">
-					<Label for="nif">Número de Identificação do Paciente</Label>
+					<Label for="nif">Número de Identificação</Label>
 					<Input id="nif" name="nif" bind:value={$form.nif} placeholder="nif do paciente" />
 					{#if $errors.nif}
 						<p class="text-sm text-red-500">{$errors.nif}</p>
@@ -41,7 +41,7 @@
 				</div>
 			</div>
 
-			<div class="mt-2 flex w-full gap-2">
+			<div class="grid gap-2 md:grid-cols-2">
 				<div class="w-full">
 					<SelectInput
 						value={$form.sexo}
@@ -63,6 +63,34 @@
 					/>
 					{#if $errors.dataNascimento}
 						<p class="text-sm text-red-500">{$errors.dataNascimento}</p>
+					{/if}
+				</div>
+			</div>
+
+			<div class="grid gap-2 md:grid-cols-2">
+				<div class="w-full">
+					<SelectInput
+						value={$form.urgencia}
+						items={urgencias}
+						name="urgencia"
+						label="Nível de Urgência"
+						placeholder="Selecione a Urgencia"
+					/>
+					{#if $errors.urgencia}
+						<p class="text-sm text-red-500">{$errors.urgencia}</p>
+					{/if}
+				</div>
+
+				<div class="w-full">
+					<SelectInput
+						value={$form.area}
+						items={areas}
+						name="area"
+						label="Área de Entrada"
+						placeholder="Selecione a area"
+					/>
+					{#if $errors.area}
+						<p class="text-sm text-red-500">{$errors.area}</p>
 					{/if}
 				</div>
 			</div>

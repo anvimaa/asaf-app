@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { toast } from 'svelte-sonner';
-
 	import { superForm } from 'sveltekit-superforms';
 	import type { ActionData, PageData } from './$types';
 	import CreateEditForm from './CreateEditForm.svelte';
