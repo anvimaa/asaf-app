@@ -30,7 +30,7 @@
 				<div class="grid gap-4">
 					<div class="grid gap-2">
 						<Label for="email">Email</Label>
-						<Input id="email" type="email" name="email" placeholder="m@example.com" required />
+						<Input id="email" type="email" name="email" placeholder="email@provedor.com" required />
 					</div>
 					<div class="grid gap-2">
 						<div class="flex items-center">

@@ -34,4 +34,4 @@ export const transations: Transation[] = [
     }
 ]
 
-export const generos: string[] = ["Masculino", "Femenino", "Outro"]
+export const generos: string[] = ["Masculino", "Feminino", "Outro"]

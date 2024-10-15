@@ -32,7 +32,7 @@
 	{/each}
 </div>
 
-<div class="grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3">
+<div class="mt-4 grid gap-2 lg:grid-cols-2 xl:grid-cols-3">
 	<Card.Root
 		class="xl:col-span-2"
 		data-x-chunk-name="dashboard-01-chunk-4"

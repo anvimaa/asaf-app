@@ -18,13 +18,13 @@
 
 	const columns: ColumnDef<Paciente>[] = [
 		{
-			accessorFn: (row) => `${row.namo}`,
+			accessorFn: (row) => `${row.nome}`,
 			id: 'Nome',
 			header: 'Nome',
 			cell: (info) => info.getValue()
 		},
 		{
-			accessorFn: (row) => `${row.genero}`,
+			accessorFn: (row) => `${row.sexo}`,
 			id: 'Genero',
 			header: 'Genero',
 			cell: (info) => info.getValue()

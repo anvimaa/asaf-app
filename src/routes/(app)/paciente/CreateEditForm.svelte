@@ -7,6 +7,7 @@
 	import * as Select from '$lib/components/ui/select/index.js';
 
 	import { generos } from '@/constants';
+	import SelectInput from '@/components/elements/form/SelectInput.svelte';
 
 	export let errors: any;
 	export let form: any;
@@ -32,22 +33,9 @@
 			</div>
 
 			<div class="mt-2 flex w-full flex-col">
-				<Select.Root name="genero">
-					<Select.Trigger class="w-[180px]">
-						<Select.Value placeholder="Selecione o Genero" />
-					</Select.Trigger>
-					<Select.Content>
-						<Select.Group>
-							<Select.Label>Generos</Select.Label>
-							{#each generos as genero}
-								<Select.Item value={genero} label={genero}>{genero}</Select.Item>
-							{/each}
-						</Select.Group>
-					</Select.Content>
-					<Select.Input name="genero" bind:value={$form.genero} />
-				</Select.Root>
-				{#if $errors.genero}
-					<p class="text-sm text-red-500">{$errors.genero}</p>
+				<SelectInput value={$form.sexo} items={generos} name="sexo" label="Genero" />
+				{#if $errors.sexo}
+					<p class="text-sm text-red-500">{$errors.sexo}</p>
 				{/if}
 			</div>
 		</Card.Content>
