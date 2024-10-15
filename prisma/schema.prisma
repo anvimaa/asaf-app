@@ -13,13 +13,13 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  name      String
-  email     String    @unique
-  password  String
-  isAdmin   Boolean?  @default(false)
-  lastLogin DateTime?
-
-  sessions Session[]
+  name        String
+  email       String    @unique
+  password    String
+  nivelAcesso String?   @default("")
+  isAdmin     Boolean?  @default(false)
+  lastLogin   DateTime?
+  sessions    Session[]
 }
 
 model Session {
@@ -31,14 +31,82 @@ model Session {
   user User @relation(references: [id], fields: [userId], onDelete: Cascade)
 }
 
-/// Modelo de Produto
+// Módulo de Gestão de Pacientes
 model Paciente {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                  Int               @id @default(autoincrement())
+  nome                String
+  dataNascimento      DateTime
+  sexo                String
+  nif                 String            @unique
+  endereco            String
+  telefone            String
+  documentoIdentidade String?
+  area                String?           @default("Triagem")
+  urgencia            String?           @default("Normal")
+  consultas           Consulta[]
+  internacoes         Internacao[]
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
+  historicoMedicos    HistoricoMedico[]
+}
 
-  nome       String
-  genero     String
-  nascimento DateTime
-  morada     String
+model HistoricoMedico {
+  id           Int       @id @default(autoincrement())
+  pacienteId   Int?
+  paciente     Paciente? @relation(fields: [pacienteId], references: [id])
+  descricao    String // Descrição do histórico
+  dataRegistro DateTime  @default(now())
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model Consulta {
+  id         Int       @id @default(autoincrement())
+  data       DateTime
+  medico     String
+  descricao  String
+  prescricao String?
+  pacienteId Int
+  paciente   Paciente  @relation(fields: [pacienteId], references: [id])
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  analises   Analise[]
+}
+
+model Analise {
+  id         Int      @id @default(autoincrement())
+  tipo       String // Ex: 'Sangue', 'Urina', etc.
+  data       DateTime @default(now())
+  resultado  String
+  consultaId Int
+  consulta   Consulta @relation(fields: [consultaId], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Internacao {
+  id           Int       @id @default(autoincrement())
+  dataAdmissao DateTime
+  dataAlta     DateTime?
+  motivo       String
+  quarto       String
+  pacienteId   Int
+  paciente     Paciente  @relation(fields: [pacienteId], references: [id])
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+// Módulo de Recursos Humanos
+model Funcionario {
+  id           Int      @id @default(autoincrement())
+  nome         String
+  genero       String
+  nif          String   @unique
+  agente       String?  @unique
+  endereco     String
+  telefone     String
+  dataAdmissao DateTime
+  funcao       String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
