@@ -15,3 +15,14 @@ export const pacienteSchema = z.object({
     area: z.string().default("Triagem").optional(), // Área com valor padrão "Triagem"
     urgencia: z.enum(["Normal", "Regular", "Intensivo"]).default("Normal").optional(), // Nível de urgência com valor padrão
 });
+
+export const triagemSchema = z.object({
+    idade: z.number().int(),
+    peso: z.number(),
+    pa: z.string().min(1, {
+        message: "Introduza o P.A"
+    }),
+    ta: z.string().min(1, { message: "Introduza a T.A" }),
+    area: z.string().default("Pediatria"),
+    obs: z.string(),
+});

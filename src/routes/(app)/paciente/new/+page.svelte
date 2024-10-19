@@ -7,11 +7,25 @@
 	import { generos, urgencias, areas } from '@/constants';
 	import SelectInput from '@/components/elements/form/SelectInput.svelte';
 	import DateTimeInput from '@/components/elements/form/DateTimeInput.svelte';
+	import type { PageData } from './$types';
+	import { superForm } from 'sveltekit-superforms';
+	import { toast } from 'svelte-sonner';
 
-	export let errors: any;
-	export let form: any;
-	export let enhance: any;
+	export let data: PageData;
+	const { form, errors, message, enhance, reset } = superForm(data.form);
+
+	$: if ($message) {
+		if ($message.type === 'error') {
+			toast.error($message.message);
+		} else {
+			toast.success($message.message);
+		}
+	}
 </script>
+
+<svelte:head>
+	<title>Novo Paciente</title>
+</svelte:head>
 
 <form method="POST" use:enhance>
 	<Card.Root
@@ -125,8 +139,18 @@
 		</Card.Content>
 		<Card.Footer class="flex gap-x-2 border-t px-6 py-4">
 			<Button type="submit">Salvar Dados</Button>
-			<Button type="reset">Limpar Formulário</Button>
-			<Button on:click type="button">Fechar Formulário</Button>
+			<Button
+				on:click={() => {
+					reset();
+				}}
+			>
+				Limpar Formulário
+			</Button>
+			<Button
+				on:click={() => {
+					history.back();
+				}}>Fechar Formulário</Button
+			>
 		</Card.Footer>
 	</Card.Root>
 </form>

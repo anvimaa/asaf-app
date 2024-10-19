@@ -17,7 +17,7 @@
 		v && (value = v.value);
 	}}
 >
-	<Select.Trigger class="w-full">
+	<Select.Trigger class="w-full" {value}>
 		<Select.Value {placeholder} />
 	</Select.Trigger>
 	<Select.Content>

@@ -60,3 +60,17 @@ export const flyAndScale = (
 		easing: cubicOut
 	};
 };
+
+export const formatDateTime: Intl.DateTimeFormatOptions = {
+	year: "numeric",
+	month: "short",
+	day: "2-digit",
+	hour: "numeric",
+	minute: "numeric",
+};
+
+export const formatDate: Intl.DateTimeFormatOptions = {
+	year: "numeric",
+	month: "long",
+	day: "2-digit",
+};

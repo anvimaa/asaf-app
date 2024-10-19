@@ -43,6 +43,12 @@ model Paciente {
   documentoIdentidade String?
   area                String?           @default("Triagem")
   urgencia            String?           @default("Normal")
+  pa                  String?           @default("Normal")
+  ta                  String?           @default("Normal")
+  peso                Float?
+  altura              Float?
+  idade               Int?
+  estadoTriagem       String?           @default("Em espera")
   consultas           Consulta[]
   internacoes         Internacao[]
   createdAt           DateTime          @default(now())

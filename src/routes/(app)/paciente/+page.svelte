@@ -1,19 +1,17 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button/index.js';
-	import { toast } from 'svelte-sonner';
 	import { superForm } from 'sveltekit-superforms';
-	import type { ActionData, PageData } from './$types';
-	import CreateEditForm from './CreateEditForm.svelte';
+	import type { PageData } from './$types';
 	import { Plus } from 'lucide-svelte';
 	import TableTanStack from '@/components/elements/table/table-tan-stack.svelte';
-	import type { ColumnDef } from '@tanstack/svelte-table';
+	import { renderComponent, type ColumnDef } from '@tanstack/svelte-table';
+
 	import type { Paciente } from '@prisma/client';
+	import ActionButton from './ActionButton.svelte';
 
 	export let data: PageData;
-	const { form, errors, message, enhance } = superForm(data.form);
 
 	const title = 'Paciente';
-	let isCreateOrEdit: boolean = false;
 
 	const columns: ColumnDef<Paciente>[] = [
 		{
@@ -45,16 +43,17 @@
 			id: 'Urgência',
 			header: 'Urgência',
 			cell: (info) => info.getValue()
+		},
+		{
+			id: 'Acções',
+			header: '...',
+			enableColumnFilter: false,
+			cell: (info) =>
+				renderComponent(ActionButton, {
+					id: info.row.original.id
+				})
 		}
 	];
-
-	$: if ($message) {
-		if ($message.type === 'error') {
-			toast.error($message.message);
-		} else {
-			toast.success($message.message);
-		}
-	}
 </script>
 
 <svelte:head>
@@ -62,16 +61,12 @@
 </svelte:head>
 
 <div class="flex flex-col gap-y-4">
-	{#if isCreateOrEdit}
-		<CreateEditForm {enhance} {form} {errors} on:click={() => (isCreateOrEdit = false)} />
-	{:else}
-		<div class="">
-			<Button class="font-bold text-white" on:click={() => (isCreateOrEdit = true)}>
-				<Plus />
-				Cadastrar {title}
-			</Button>
-		</div>
+	<div class="">
+		<Button class="font-bold text-white" href="/paciente/new?id=2000">
+			<Plus />
+			Cadastrar {title}
+		</Button>
+	</div>
 
-		<TableTanStack {title} {columns} itens={data.pacientes}></TableTanStack>
-	{/if}
+	<TableTanStack {title} {columns} itens={data.pacientes}></TableTanStack>
 </div>

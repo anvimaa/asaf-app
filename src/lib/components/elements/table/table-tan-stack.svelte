@@ -231,13 +231,12 @@
 				</div>
 			</div>
 
-			<Separator />
-
-			<div class="relative overflow-x-auto">
+			<div class="relative mt-4 overflow-x-auto">
 				<Table.Root>
 					<Table.Header>
 						{#each $table.getHeaderGroups() as headerGroup}
 							<Table.Row>
+								<Table.Head>#</Table.Head>
 								{#if showPrinter}
 									<Table.Head class="text-center">-</Table.Head>
 								{/if}
@@ -267,8 +266,9 @@
 
 					<Table.Body>
 						{#if itens.length > 0}
-							{#each $table.getRowModel().rows as row}
+							{#each $table.getRowModel().rows as row, i}
 								<Table.Row>
+									<Table.Cell class="text-center">{i + 1}</Table.Cell>
 									{#if showPrinter}
 										<Table.Cell class="text-center">
 											<input
