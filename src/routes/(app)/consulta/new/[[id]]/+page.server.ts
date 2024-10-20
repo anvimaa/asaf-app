@@ -13,10 +13,13 @@ export const load = (async ({ params }) => {
 
 export const actions: Actions = {
     default: async ({ request }) => {
+        const formData = Object.fromEntries(await request.formData());
+        console.log(formData)
+
         const form = await superValidate(request, zod(consultaSchema));
 
         if (!form.valid) {
-            //console.log(form.errors, form.data);
+            console.error(form.errors);
             return fail(400, { form });
         }
 

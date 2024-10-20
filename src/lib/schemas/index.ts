@@ -33,7 +33,16 @@ export const consultaSchema = z.object({
     data: z.string().refine((val) => !isNaN(Date.parse(val)), {
         message: "Data de nascimento inválida"
     }),
-    medico: z.number().int(),
+    medico: z.string(),
     descricao: z.string().min(1),
     prescricao: z.string().optional(),
 });
+
+export const analiseSchema = z.object({
+    id: z.number().int().optional(),
+    tipo: z.string(),
+    data: z.string().min(1),
+    resultado: z.string().optional(),
+});
+
+export type AnaliseType = z.infer<typeof analiseSchema>;
