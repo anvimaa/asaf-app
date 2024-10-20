@@ -5,8 +5,6 @@ import { zod } from 'sveltekit-superforms/adapters';
 import { triagemSchema } from '@/schemas';
 
 export const load = (async ({ params }) => {
-    let form = await superValidate(zod(triagemSchema));
-
     const paciente = await db.paciente.findUnique({
         where: { id: +params.id },
         include: {
@@ -15,6 +13,9 @@ export const load = (async ({ params }) => {
             internacoes: true
         }
     })
+
+    //@ts-ignore
+    let form = await superValidate(paciente, zod(triagemSchema));
     return { paciente, form };
 }) satisfies PageServerLoad;
 
@@ -31,8 +32,8 @@ export const actions: Actions = {
         console.log(data)
 
         try {
-            //const paciente = await db.paciente.create({ data: { ...data, dataNascimento: new Date(data.dataNascimento) } });
-            return message(form, { type: 'success', message: `Registrado com sucesso!` });
+            const paciente = await db.paciente.update({ data: { ...data }, where: { id: data.id } })
+            return message(form, { type: 'success', message: `Triagem realizada com sucesso!` });
         } catch (error) {
             console.error(error);
             return message(form, { type: 'error', message: 'Erro ao Registrar' });

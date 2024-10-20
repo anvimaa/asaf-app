@@ -4,16 +4,21 @@ import type { Actions, PageServerLoad } from './$types';
 import { pacienteSchema } from '@/schemas';
 import { db } from '@/server/db';
 import { error } from '@sveltejs/kit';
+import { z } from 'zod';
+
+const pacienteCrud = pacienteSchema.extend({
+    id: z.number().int().optional()
+})
 
 export const load = (async ({ url }) => {
     const id = url.searchParams.get("id")
-    let form = await superValidate(zod(pacienteSchema));
+    let form = await superValidate(zod(pacienteCrud));
 
     if (id !== null) {
         console.log(+id * 2)
         const paciente = await db.paciente.findUnique({ where: { id: +id } });
         if (!paciente) error(404, "Paciente não encontrado")
-        form = await superValidate(paciente, zod(pacienteSchema));
+        form = await superValidate(paciente, zod(pacienteCrud));
     }
 
     return { form };
@@ -22,7 +27,7 @@ export const load = (async ({ url }) => {
 
 export const actions: Actions = {
     default: async ({ request }) => {
-        const form = await superValidate(request, zod(pacienteSchema));
+        const form = await superValidate(request, zod(pacienteCrud));
 
         if (!form.valid) {
             //console.log(form.errors, form.data);

@@ -39,7 +39,7 @@
 			cell: (info) => info.getValue()
 		},
 		{
-			accessorFn: (row) => `${row.urgencia}`,
+			accessorFn: (row) => `${row.urgencia || '-'}`,
 			id: 'Urgência',
 			header: 'Urgência',
 			cell: (info) => info.getValue()
@@ -62,7 +62,7 @@
 
 <div class="flex flex-col gap-y-4">
 	<div class="">
-		<Button class="font-bold text-white" href="/paciente/new?id=2000">
+		<Button class="font-bold text-white" href="/paciente/new">
 			<Plus />
 			Cadastrar {title}
 		</Button>

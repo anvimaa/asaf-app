@@ -1,4 +1,4 @@
-import { LayoutDashboard, Package, User } from "lucide-svelte";
+import { ContactRound, LayoutDashboard, Microscope, Package, User } from "lucide-svelte";
 import type { ItemMenu } from "./types";
 
 export const app_menu: ItemMenu[] = [
@@ -10,6 +10,11 @@ export const app_menu: ItemMenu[] = [
     {
         label: "Pacientes",
         href: "/paciente",
-        icon: Package,
+        icon: ContactRound,
+    },
+    {
+        label: "Consultas",
+        href: "/consulta",
+        icon: Microscope
     },
 ]

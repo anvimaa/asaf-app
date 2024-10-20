@@ -1,7 +1,6 @@
 <script lang="ts">
 	import * as Select from '$lib/components/ui/select/index.js';
 	import Label from '@/components/ui/label/label.svelte';
-	import { generos } from '@/constants';
 
 	export let items: any = [];
 	export let value: any;
@@ -28,5 +27,6 @@
 			{/each}
 		</Select.Group>
 	</Select.Content>
-	<Select.Input {name} type="hidden" bind:value />
+	<Select.Input />
 </Select.Root>
+<input type="hidden" {name} bind:value />

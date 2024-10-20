@@ -53,7 +53,7 @@
 							</DropdownMenu.Shortcut>
 						</DropdownMenu.Item>
 						<DropdownMenu.Separator />
-						<DropdownMenu.Item>
+						<DropdownMenu.Item href="/paciente/delete/{paciente.id}">
 							Deletar
 							<DropdownMenu.Shortcut>
 								<Trash size={16} class="text-red-700" />

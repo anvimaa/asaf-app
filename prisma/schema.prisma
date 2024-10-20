@@ -33,27 +33,30 @@ model Session {
 
 // Módulo de Gestão de Pacientes
 model Paciente {
-  id                  Int               @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   nome                String
-  dataNascimento      DateTime
   sexo                String
-  nif                 String            @unique
+  nif                 String    @unique
   endereco            String
-  telefone            String
+  telefone            String?
   documentoIdentidade String?
-  area                String?           @default("Triagem")
-  urgencia            String?           @default("Normal")
-  pa                  String?           @default("Normal")
-  ta                  String?           @default("Normal")
+  urgencia            String?
+  pa                  String?
+  ta                  String?
   peso                Float?
   altura              Float?
   idade               Int?
-  estadoTriagem       String?           @default("Em espera")
-  consultas           Consulta[]
-  internacoes         Internacao[]
-  createdAt           DateTime          @default(now())
-  updatedAt           DateTime          @updatedAt
-  historicoMedicos    HistoricoMedico[]
+  area                String?   @default("Por indicar")
+  estadoTriagem       String?   @default("Em espera")
+  dataNascimento      DateTime?
+  obs                 String?
+
+  consultas        Consulta[]
+  internacoes      Internacao[]
+  historicoMedicos HistoricoMedico[]
 }
 
 model HistoricoMedico {
@@ -67,15 +70,17 @@ model HistoricoMedico {
 }
 
 model Consulta {
-  id         Int       @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   data       DateTime
   medico     String
   descricao  String
   prescricao String?
+
   pacienteId Int
   paciente   Paciente  @relation(fields: [pacienteId], references: [id])
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
   analises   Analise[]
 }
 

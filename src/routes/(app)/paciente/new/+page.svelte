@@ -4,7 +4,7 @@
 	import { Input } from '@/components/ui/input';
 	import { Label } from '@/components/ui/label';
 
-	import { generos, urgencias, areas } from '@/constants';
+	import { generos } from '@/constants';
 	import SelectInput from '@/components/elements/form/SelectInput.svelte';
 	import DateTimeInput from '@/components/elements/form/DateTimeInput.svelte';
 	import type { PageData } from './$types';
@@ -24,7 +24,7 @@
 </script>
 
 <svelte:head>
-	<title>Novo Paciente</title>
+	<title>{$form.id ? 'Editar' : 'Cadastrar'} Paciente</title>
 </svelte:head>
 
 <form method="POST" use:enhance>
@@ -33,7 +33,7 @@
 		data-x-chunk-description="A form to update the store name."
 	>
 		<Card.Header>
-			<Card.Title>Cadastrar Paciente</Card.Title>
+			<Card.Title>{$form.id ? 'Editar' : 'Cadastrar'} Paciente</Card.Title>
 			<Card.Description>Preencha todas as informações do formulário.</Card.Description>
 		</Card.Header>
 		<Card.Content>
@@ -77,34 +77,6 @@
 					/>
 					{#if $errors.dataNascimento}
 						<p class="text-sm text-red-500">{$errors.dataNascimento}</p>
-					{/if}
-				</div>
-			</div>
-
-			<div class="grid gap-2 md:grid-cols-2">
-				<div class="w-full">
-					<SelectInput
-						value={$form.urgencia}
-						items={urgencias}
-						name="urgencia"
-						label="Nível de Urgência"
-						placeholder="Selecione a Urgencia"
-					/>
-					{#if $errors.urgencia}
-						<p class="text-sm text-red-500">{$errors.urgencia}</p>
-					{/if}
-				</div>
-
-				<div class="w-full">
-					<SelectInput
-						value={$form.area}
-						items={areas}
-						name="area"
-						label="Área de Entrada"
-						placeholder="Selecione a area"
-					/>
-					{#if $errors.area}
-						<p class="text-sm text-red-500">{$errors.area}</p>
 					{/if}
 				</div>
 			</div>

@@ -36,4 +36,5 @@ export const transations: Transation[] = [
 export const generos: string[] = ["Masculino", "Feminino", "Outro"]
 export const urgencias: string[] = ["Normal", "Regular", "Intensivo"]
 export const areas: string[] = ["Triagem", "Banco de Urgência", "Medicina"]
-export const consultas: string[] = ["Pediatria", "Medicina", "Nutrição", "Pre-natal", "Planeamento Familiar"]
+export const consultas: string[] = ["Por indicar", "Pediatria", "Medicina", "Nutrição", "Pre-natal", "Planeamento Familiar"]
+export const analises: string[] = ["Sangue"]
