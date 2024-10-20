@@ -8,7 +8,8 @@ import { z } from 'zod';
 
 export const load = (async ({ params }) => {
     let form = await superValidate(zod(consultaSchema));
-    return { form };
+    const pacientes = await db.paciente.findMany()
+    return { form, pacientes };
 }) satisfies PageServerLoad;
 
 export const actions: Actions = {

@@ -8,4 +8,4 @@
 
 <Label for={name}>{label}</Label>
 
-<input class="w-full rounded-sm border p-1" type="date" {name} bind:value />
+<input class="w-full rounded-sm border p-1" type="date" id={name} {name} bind:value />

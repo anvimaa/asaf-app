@@ -14,9 +14,10 @@
 	import Separator from '@/components/ui/separator/separator.svelte';
 	import { Trash } from 'lucide-svelte';
 	import type { AnaliseType } from '@/schemas';
+	import ComboPacientes from './ComboPacientes.svelte';
 
 	export let data: PageData;
-	const { form, errors, message, enhance, reset } = superForm(data.form);
+	const { form, errors, message, reset } = superForm(data.form);
 
 	$: if ($message) {
 		if ($message.type === 'error') {
@@ -26,14 +27,10 @@
 		}
 	}
 
-	let countAnalises = 1;
-	let selectedTipoAnalise = '';
-
 	let analiseList: AnaliseType[] = [];
 
 	function addAnalise(): void {
 		analiseList = [...analiseList, { id: 0, tipo: '', data: '', resultado: '' }];
-		console.log(analiseList);
 	}
 
 	function removeAnalise(index: number): void {
@@ -43,13 +40,31 @@
 	function removeAllAnalise(): void {
 		analiseList = [];
 	}
+
+	async function handleSubmit(event: SubmitEvent) {
+		event.preventDefault();
+
+		const formData = new FormData(event.target as HTMLFormElement);
+
+		// Serializar a lista de objetos como JSON
+		formData.append('analiseList', JSON.stringify(analiseList));
+
+		// Submeter a API route
+		const response = await fetch('/api/consulta', {
+			method: 'POST',
+			body: formData
+		});
+
+		const result = await response.json();
+		console.log(result);
+	}
 </script>
 
 <svelte:head>
 	<title>{$form.id ? 'Atualizar' : 'Agendar'} Consulta</title>
 </svelte:head>
 
-<form method="POST" use:enhance>
+<form on:submit={handleSubmit}>
 	<Card.Root
 		data-x-chunk-name="dashboard-04-chunk-1"
 		data-x-chunk-description="A form to update the store name."
@@ -59,6 +74,9 @@
 			<Card.Description>Preencha todas as informações do formulário.</Card.Description>
 		</Card.Header>
 		<Card.Content>
+			<div class="grid">
+				<ComboPacientes pacientes={data.pacientes} name="pacienteId" />
+			</div>
 			<div class="mb-2 grid gap-2 md:grid-cols-2">
 				<div class="w-full">
 					<Label for="medico">Medico do Paciente</Label>
@@ -108,7 +126,7 @@
 							<Select.Root
 								selected={{ value: '', label: '' }}
 								onSelectedChange={(v) => {
-									v && (selectedTipoAnalise = v.value);
+									v && (analiseList[i].tipo = v.value);
 								}}
 							>
 								<Select.Trigger id="tipoAnalise" name="tipoAnalise">
@@ -120,16 +138,24 @@
 									{/each}
 								</Select.Content>
 							</Select.Root>
-							<input hidden name="tipoAnalise" bind:value={selectedTipoAnalise} />
 						</div>
 
 						<div class="w-full">
-							<DateTimeInput value={$form.data} name="dataAnalise" label="Data da analise" />
+							<DateTimeInput
+								bind:value={analiseList[i].data}
+								name="dataAnalise"
+								label="Data da analise"
+							/>
 						</div>
 
 						<div class="w-full">
 							<Label for="resultadoAnalise">Resultado</Label>
-							<Input id="resultadoAnalise" name="resultadoAnalise" placeholder="Resultado" />
+							<Input
+								id="resultadoAnalise"
+								bind:value={analiseList[i].resultado}
+								name="resultadoAnalise"
+								placeholder="Resultado"
+							/>
 						</div>
 
 						<Button

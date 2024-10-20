@@ -29,11 +29,11 @@ export const triagemSchema = z.object({
 
 export const consultaSchema = z.object({
     id: z.number().int().optional(),
-    pacienteId: z.number().int(),
+    pacienteId: z.number().int().optional(),
     data: z.string().refine((val) => !isNaN(Date.parse(val)), {
         message: "Data de nascimento inválida"
     }),
-    medico: z.string(),
+    medico: z.string().min(1),
     descricao: z.string().min(1),
     prescricao: z.string().optional(),
 });
