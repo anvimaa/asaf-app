@@ -1,5 +1,6 @@
 import { json, type RequestHandler } from '@sveltejs/kit';
 import { consultaSchema } from '../../../lib/schemas';
+import { db } from '@/server/db';
 
 interface Analise {
     id: number;
@@ -41,13 +42,33 @@ export const POST: RequestHandler = async ({ request }) => {
             return json({ error: 'Formato de dados inválido.' }, { status: 400 });
         }
 
-        // Processar a lista de análises
-        console.log(analiseList);
-        console.log(schema.data);
+        // Processar a consulta
 
-        return json({ success: true, message: 'Lista de análises recebida e processada.' });
+        let consulta = await db.consulta.create({
+            data: {
+                medico: schema.data.medico,
+                data: new Date(schema.data.data),
+                descricao: schema.data.descricao,
+                pacienteId: schema.data.pacienteId,
+                prescricao: schema.data.prescricao,
+                tipo: schema.data.tipoConsulta
+            }
+        })
+
+        for (const an of analiseList) {
+            const analise = await db.analise.create({
+                data: {
+                    tipo: an.tipo,
+                    resultado: an.resultado,
+                    consultaId: consulta.id,
+                    data: new Date(an.data)
+                }
+            })
+        }
+
+        return json({ success: true, message: 'Consulta Agendada com sucesso.' });
     } catch (error) {
         console.error(error)
-        return json({ error: 'Erro ao processar a requisição.' }, { status: 500 });
+        return json({ error: 'Erro ao processar a consulta.' }, { status: 500 });
     }
 };

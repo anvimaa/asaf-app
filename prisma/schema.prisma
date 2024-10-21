@@ -76,6 +76,7 @@ model Consulta {
 
   data       DateTime
   medico     String
+  tipo       String
   descricao  String
   prescricao String?
 

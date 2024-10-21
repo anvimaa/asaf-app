@@ -29,7 +29,8 @@ export const triagemSchema = z.object({
 
 export const consultaSchema = z.object({
     id: z.number().int().optional(),
-    pacienteId: z.number().int().optional(),
+    tipoConsulta: z.string(),
+    pacienteId: z.number().int(),
     data: z.string().refine((val) => !isNaN(Date.parse(val)), {
         message: "Data de nascimento inválida"
     }),

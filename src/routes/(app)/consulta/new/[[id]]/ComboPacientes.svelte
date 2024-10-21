@@ -7,6 +7,7 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { cn } from '$lib/utils.js';
 	import type { Paciente } from '@prisma/client';
+	import Label from '@/components/ui/label/label.svelte';
 
 	export let pacientes: Paciente[];
 	export let name: string;
@@ -27,7 +28,8 @@
 	}
 </script>
 
-<div class="w-full">
+<div class="grid">
+	<Label>Paciente</Label>
 	<Popover.Root bind:open let:ids>
 		<Popover.Trigger asChild let:builder>
 			<Button
@@ -41,7 +43,7 @@
 				<CaretSort class="ml-2 h-4 w-4 shrink-0 opacity-50" />
 			</Button>
 		</Popover.Trigger>
-		<Popover.Content class="w-[350px] p-0">
+		<Popover.Content class="p-0">
 			<Command.Root>
 				<Command.Input placeholder="Pesquisar Paciente" class="h-9 w-[350px]" />
 				<Command.Empty>Nenhum Paciente encontrado.</Command.Empty>
@@ -62,6 +64,6 @@
 			</Command.Root>
 		</Popover.Content>
 	</Popover.Root>
-</div>
 
-<input type="hidden" bind:value {name} id={name} />
+	<input type="hidden" bind:value {name} id={name} />
+</div>

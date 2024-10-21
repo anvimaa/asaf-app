@@ -5,7 +5,7 @@
 	import { Label } from '@/components/ui/label';
 	import * as Select from '@/components/ui/select/index.js';
 
-	import { analises } from '@/constants';
+	import { analises, tiposConsulta } from '@/constants';
 	import DateTimeInput from '@/components/elements/form/DateTimeInput.svelte';
 	import type { PageData } from './$types';
 	import { superForm } from 'sveltekit-superforms';
@@ -28,6 +28,16 @@
 	}
 
 	let analiseList: AnaliseType[] = [];
+	let tipoConsulta: string = '';
+
+	let formState = {
+		medico: '',
+		pacienteId: undefined,
+		prescricao: '',
+		descricao: '',
+		data: '',
+		tipoConsulta: ''
+	};
 
 	function addAnalise(): void {
 		analiseList = [...analiseList, { id: 0, tipo: '', data: '', resultado: '' }];
@@ -57,6 +67,17 @@
 
 		const result = await response.json();
 		console.log(result);
+
+		toast.success(result.message);
+		removeAllAnalise();
+		formState = {
+			medico: '',
+			pacienteId: undefined,
+			prescricao: '',
+			descricao: '',
+			data: '',
+			tipoConsulta: ''
+		};
 	}
 </script>
 
@@ -74,24 +95,42 @@
 			<Card.Description>Preencha todas as informações do formulário.</Card.Description>
 		</Card.Header>
 		<Card.Content>
-			<div class="grid">
+			<div class="grid gap-2 md:grid-cols-2">
 				<ComboPacientes pacientes={data.pacientes} name="pacienteId" />
+
+				<div class="grid gap-3">
+					<Label for="tipoConsulta">Tipo de Consulta</Label>
+					<Select.Root
+						selected={{ value: '', label: '' }}
+						onSelectedChange={(v) => {
+							v && (formState.tipoConsulta = v.value);
+						}}
+					>
+						<Select.Trigger id="tipoConsulta" name="tipoConsulta">
+							<Select.Value placeholder="Selecione a consulta" />
+						</Select.Trigger>
+						<Select.Content>
+							{#each tiposConsulta as value}
+								<Select.Item {value} label={value} class="">{value}</Select.Item>
+							{/each}
+						</Select.Content>
+					</Select.Root>
+					<input type="hidden" name="tipoConsulta" bind:value={formState.tipoConsulta} />
+				</div>
 			</div>
+
 			<div class="mb-2 grid gap-2 md:grid-cols-2">
 				<div class="w-full">
 					<Label for="medico">Medico do Paciente</Label>
 					<Input
 						id="medico"
 						name="medico"
-						bind:value={$form.medico}
+						bind:value={formState.medico}
 						placeholder="medico do paciente"
 					/>
-					{#if $errors.medico}
-						<p class="text-sm text-red-500">{$errors.medico}</p>
-					{/if}
 				</div>
 				<div class="w-full">
-					<DateTimeInput value={$form.data} name="data" label="Data da Consulta" />
+					<DateTimeInput value={formState.data} name="data" label="Data da Consulta" />
 					{#if $errors.data}
 						<p class="text-sm text-red-500">{$errors.data}</p>
 					{/if}
@@ -99,7 +138,7 @@
 				<div class="grid gap-3">
 					<Label for="descricao">Descrição</Label>
 					<Textarea
-						bind:value={$form.descricao}
+						bind:value={formState.descricao}
 						id="descricao"
 						name="descricao"
 						placeholder="Descrição..."
@@ -109,7 +148,7 @@
 				<div class="grid gap-3">
 					<Label for="prescricao">Prescrição</Label>
 					<Textarea
-						bind:value={$form.prescricao}
+						bind:value={formState.prescricao}
 						id="prescricao"
 						name="prescricao"
 						placeholder="Prescrição..."

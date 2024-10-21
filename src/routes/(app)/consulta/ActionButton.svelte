@@ -6,7 +6,7 @@
 	import { InfoIcon, Pencil, Trash } from 'lucide-svelte';
 
 	export let id: number;
-	export let route = 'paciente';
+	export let route = 'consulta';
 </script>
 
 <DropdownMenu.Root>
@@ -36,20 +36,7 @@
 			</DropdownMenu.Shortcut>
 		</DropdownMenu.Item>
 		<DropdownMenu.Separator />
-
-		<DropdownMenu.Sub>
-			<DropdownMenu.SubTrigger>Outros</DropdownMenu.SubTrigger>
-			<DropdownMenu.SubContent>
-				<DropdownMenu.RadioGroup value={'Outros'}>
-					<DropdownMenu.RadioItem value="Triagem">
-						<a href="/paciente/triagem/{id}">Triagem</a>
-					</DropdownMenu.RadioItem>
-					<DropdownMenu.RadioItem value="Consulta">Consulta</DropdownMenu.RadioItem>
-				</DropdownMenu.RadioGroup>
-			</DropdownMenu.SubContent>
-		</DropdownMenu.Sub>
-		<DropdownMenu.Separator />
-		<DropdownMenu.Item href="/paciente/delete/{id}">
+		<DropdownMenu.Item href="/{route}/delete/{id}">
 			Deletar
 			<DropdownMenu.Shortcut>
 				<Trash size={16} class="text-red-700" />
