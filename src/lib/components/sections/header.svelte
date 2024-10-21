@@ -6,6 +6,7 @@
 	import { Package2, Home, LineChart, LogOut } from 'lucide-svelte';
 	import Search from 'lucide-svelte/icons/search';
 	import Users from 'lucide-svelte/icons/users';
+	import { page } from '$app/stores';
 
 	import { Badge } from '$lib/components/ui/badge/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
@@ -13,6 +14,7 @@
 	import { Input } from '$lib/components/ui/input/index.js';
 	import * as Sheet from '$lib/components/ui/sheet/index.js';
 	import ThemeDropdown from '../elements/theme-dropdown.svelte';
+	import { app_menu } from '@/menus';
 
 	export let user: any;
 </script>
@@ -31,44 +33,16 @@
 					<Package2 class="h-6 w-6" />
 					<span class="">SGH - SADISSA</span>
 				</a>
-				<a
-					href="##"
-					class="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-				>
-					<Home class="h-5 w-5" />
-					Dashboard
-				</a>
-				<a
-					href="##"
-					class="mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-muted px-3 py-2 text-foreground hover:text-foreground"
-				>
-					<ShoppingCart class="h-5 w-5" />
-					Orders
-					<Badge class="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-						6
-					</Badge>
-				</a>
-				<a
-					href="##"
-					class="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-				>
-					<Package class="h-5 w-5" />
-					Products
-				</a>
-				<a
-					href="##"
-					class="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-				>
-					<Users class="h-5 w-5" />
-					Customers
-				</a>
-				<a
-					href="##"
-					class="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-				>
-					<LineChart class="h-5 w-5" />
-					Analytics
-				</a>
+				{#each app_menu as menu}
+					<a
+						class:active={$page.url.pathname === menu.href}
+						href={menu.href}
+						class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+					>
+						<svelte:component this={menu.icon} />
+						{menu.label}
+					</a>
+				{/each}
 			</nav>
 			<div class="mt-auto"></div>
 		</Sheet.Content>
