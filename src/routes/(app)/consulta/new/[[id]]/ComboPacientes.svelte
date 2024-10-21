@@ -41,21 +41,21 @@
 				<CaretSort class="ml-2 h-4 w-4 shrink-0 opacity-50" />
 			</Button>
 		</Popover.Trigger>
-		<Popover.Content class="p-0">
+		<Popover.Content class="w-[350px] p-0">
 			<Command.Root>
-				<Command.Input placeholder="Pesquisar Paciente" class="h-9" />
+				<Command.Input placeholder="Pesquisar Paciente" class="h-9 w-[350px]" />
 				<Command.Empty>Nenhum Paciente encontrado.</Command.Empty>
 				<Command.Group>
-					{#each pacientes as framework}
+					{#each pacientes as paciente}
 						<Command.Item
-							value={framework.id.toString()}
+							value={paciente.id.toString()}
 							onSelect={(currentValue) => {
 								value = +currentValue;
 								closeAndFocusTrigger(ids.trigger);
 							}}
 						>
-							<Check class={cn('mr-2 h-4 w-4', value !== framework.id && 'text-transparent')} />
-							{framework.nome + ' - ' + framework.nif}
+							<Check class={cn('mr-2 h-4 w-4', value !== paciente.id && 'text-transparent')} />
+							{paciente.id + ' - ' + paciente.nome}
 						</Command.Item>
 					{/each}
 				</Command.Group>
