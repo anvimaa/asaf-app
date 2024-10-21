@@ -45,7 +45,7 @@
 	</div>
 	<div class="hidden bg-muted lg:block">
 		<img
-			src="https://placehold.jp/1400x1400.png"
+			src="/hospital.avif"
 			alt="placeholder"
 			class="h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
 		/>
