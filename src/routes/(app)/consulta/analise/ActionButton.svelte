@@ -3,10 +3,10 @@
 
 	import { Button } from '@/components/ui/button/index.js';
 	import * as DropdownMenu from '@/components/ui/dropdown-menu/index.js';
-	import { InfoIcon, Pencil, Trash, Stethoscope } from 'lucide-svelte';
+	import { InfoIcon, Pencil, Trash } from 'lucide-svelte';
 
 	export let id: number;
-	export let route = 'consulta';
+	export let route = 'consulta/analise';
 </script>
 
 <DropdownMenu.Root>
@@ -22,24 +22,9 @@
 	</DropdownMenu.Trigger>
 	<DropdownMenu.Content class="w-[160px]" align="end">
 		<DropdownMenu.Item href="/{route}/{id}">
-			Detalhes
-			<DropdownMenu.Shortcut>
-				<InfoIcon size={16} class="" />
-			</DropdownMenu.Shortcut>
-		</DropdownMenu.Item>
-		<DropdownMenu.Separator />
-
-		<DropdownMenu.Item href="/{route}/new?id={id}">
 			Editar
 			<DropdownMenu.Shortcut>
 				<Pencil size={16} class="" />
-			</DropdownMenu.Shortcut>
-		</DropdownMenu.Item>
-
-		<DropdownMenu.Item href="/consulta/analise?consulta={id}">
-			Analise
-			<DropdownMenu.Shortcut>
-				<Stethoscope size={16} class="" />
 			</DropdownMenu.Shortcut>
 		</DropdownMenu.Item>
 		<DropdownMenu.Separator />

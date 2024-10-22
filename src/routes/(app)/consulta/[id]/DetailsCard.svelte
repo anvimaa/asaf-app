@@ -4,7 +4,7 @@
 	import * as Card from '@/components/ui/card/index.js';
 	import * as DropdownMenu from '@/components/ui/dropdown-menu/index.js';
 	import { Separator } from '@/components/ui/separator/index.js';
-	import { PrinterCheck, Trash, Pencil, HeartPulse } from 'lucide-svelte';
+	import { PrinterCheck, Trash, Pencil, HeartPulse, Stethoscope } from 'lucide-svelte';
 	import DetailsItem from '@/components/elements/details-item.svelte';
 	import { formatDate, formatDateTime } from '@/utils';
 	import { analises } from '@/constants';
@@ -45,6 +45,12 @@
 							Editar
 							<DropdownMenu.Shortcut>
 								<Pencil size={16} class="" />
+							</DropdownMenu.Shortcut>
+						</DropdownMenu.Item>
+						<DropdownMenu.Item href="/consulta/analise?consulta={consulta.id}">
+							Analise
+							<DropdownMenu.Shortcut>
+								<Stethoscope size={16} class="" />
 							</DropdownMenu.Shortcut>
 						</DropdownMenu.Item>
 						<DropdownMenu.Separator />
