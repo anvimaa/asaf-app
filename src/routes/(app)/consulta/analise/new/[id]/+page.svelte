@@ -13,7 +13,7 @@
 	export let data: PageData;
 
 	const { form, errors, message, reset, enhance } = superForm(data.form, {
-		resetForm: false
+		resetForm: true
 	});
 
 	$: if ($message) {
@@ -28,7 +28,7 @@
 <div class="flex gap-1">
 	<div class="relative hidden flex-col items-start gap-8 md:flex">
 		<form class="grid w-full items-start gap-6" method="post" use:enhance>
-			<input type="hidden" name="id" value={data.analise?.id} />
+			<input type="hidden" name="id" value="0" />
 			<fieldset class="grid gap-6 rounded-lg border p-4">
 				<legend class="-ml-1 px-1 text-sm font-medium"> Informações da Analise </legend>
 				<div class="grid gap-4">
@@ -40,7 +40,6 @@
 						{/if}
 					</div>
 					<div class="grid gap-3">
-						<p>{ISOString(data.analise?.data)}</p>
 						<DateTimeInput value={$form.data} name="data" label="Data da análise" />
 						{#if $errors.data}
 							<p class="text-sm text-red-600">{$errors.data}</p>
@@ -75,7 +74,7 @@
 					}}
 				>
 					<ArrowLeft></ArrowLeft>
-					Cancelar
+					Voltar
 				</Button>
 			</fieldset>
 		</form>
