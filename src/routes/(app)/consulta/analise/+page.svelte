@@ -50,10 +50,8 @@
 
 <div class="flex flex-col gap-y-4">
 	<div class="">
-		<Button class="font-bold text-white" href="/consulta/new">
-			<Plus />
-			Agendar {title}
-		</Button>
+		<p>Consulta: {data.consulta?.tipo}</p>
+		<p>Paciente: {data.consulta?.paciente.nome}</p>
 	</div>
 
 	<TableTanStack {title} {columns} itens={data.analises}></TableTanStack>
