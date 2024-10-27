@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button/index.js';
 	import type { PageData } from './$types';
-	import { Plus, ExternalLink, Minus } from 'lucide-svelte';
+	import { Plus, NotebookTabs, Minus, Factory } from 'lucide-svelte';
 	import TableTanStack from '@/components/elements/table/table-tan-stack.svelte';
 	import { renderComponent, type ColumnDef } from '@tanstack/svelte-table';
 
@@ -50,15 +50,28 @@
 </svelte:head>
 
 <div class="flex flex-col gap-y-4">
-	<div class="flex gap-2">
-		<Button class="mb-2 font-bold text-white" href="/farmacia/entrada">
-			<Plus />
-			Entrada
-		</Button>
-		<Button class="mb-2 font-bold text-white" href="/farmacia/saida">
-			<Minus />
-			Saida
-		</Button>
+	<div class="flex justify-between gap-2">
+		<div>
+			<Button class="mb-2 font-bold text-white" href="/farmacia/entrada">
+				<Plus />
+				Entrada
+			</Button>
+			<Button class="mb-2 font-bold text-white" href="/farmacia/saida">
+				<Minus />
+				Saida
+			</Button>
+		</div>
+
+		<div>
+			<Button class="mb-2 font-bold text-white" href="/farmacia/categorias">
+				<NotebookTabs />
+				Categorias
+			</Button>
+			<Button class="mb-2 font-bold text-white" href="/farmacia/fornecedores">
+				<Factory />
+				Fornecedores
+			</Button>
+		</div>
 	</div>
 
 	<TableTanStack {title} {columns} itens={data.analises}></TableTanStack>

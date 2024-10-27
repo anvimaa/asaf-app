@@ -131,7 +131,7 @@ model Categoria {
   updatedAt DateTime @updatedAt
 
   nome         String        @unique
-  descricao    String        @unique
+  descricao    String?
   medicamentos Medicamento[]
 }
 

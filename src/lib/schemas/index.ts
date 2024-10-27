@@ -50,3 +50,10 @@ export const analiseSchema = z.object({
 });
 
 export type AnaliseType = z.infer<typeof analiseSchema>;
+
+
+export const categoriaSchema = z.object({
+    id: z.number().int().optional(),
+    nome: z.string().min(1, { message: "Informe o nome" }),
+    descricao: z.string().optional(),
+});
