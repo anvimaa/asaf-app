@@ -6,20 +6,24 @@ export const app_menu: ItemMenu[] = [
         label: "Painel",
         href: "/dashboard",
         icon: LayoutDashboard,
+        levels: ["a", "m", "f", "r"]
     },
     {
         label: "Pacientes",
         href: "/paciente",
         icon: ContactRound,
+        levels: ["a"]
     },
     {
         label: "Consultas",
         href: "/consulta",
-        icon: Microscope
+        icon: Microscope,
+        levels: ["a", "m"]
     },
     {
         label: "Farmácia",
         href: "/farmacia",
-        icon: BriefcaseMedical
+        icon: BriefcaseMedical,
+        levels: ["a", "f"]
     },
 ]

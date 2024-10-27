@@ -161,12 +161,10 @@ model Medicamento {
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
   prescricoes   Prescricao[]
-
-  categoria   Categoria @relation(fields: [categoriaId], references: [id])
-  categoriaId Int
-
-  fornecedor   Fornecedor @relation(fields: [fornecedorId], references: [id])
-  fornecedorId Int
+  categoria     Categoria    @relation(fields: [categoriaId], references: [id])
+  categoriaId   Int
+  fornecedor    Fornecedor   @relation(fields: [fornecedorId], references: [id])
+  fornecedorId  Int
 }
 
 model Saida {

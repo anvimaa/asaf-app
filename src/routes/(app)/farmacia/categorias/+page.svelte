@@ -9,6 +9,7 @@
 	import InputTextArea from '@/components/elements/form/InputTextArea.svelte';
 	import { superForm } from 'sveltekit-superforms';
 	import { toast } from 'svelte-sonner';
+	import Drawer from '@/components/elements/drawer.svelte';
 
 	export let data: PageData;
 
@@ -58,31 +59,13 @@
 	<TableTanStack {title} {columns} itens={data.categorias}></TableTanStack>
 </div>
 
-<div class="drawer drawer-end">
-	<input id="drawer-add" type="checkbox" class="drawer-toggle" />
-	<div class="drawer-content">
-		<!-- Page content here -->
-	</div>
-	<div class="drawer-side">
-		<label for="drawer-add" aria-label="close sidebar" class="drawer-overlay"></label>
-		<div class="min-h-full w-[50%] bg-zinc-300 p-4 text-base-content dark:bg-zinc-800">
-			<form method="post" use:enhance>
-				<InputText
-					error={$errors.nome}
-					bind:value={$form.nome}
-					name="nome"
-					label="Nome da Categoria"
-				/>
-				<InputTextArea
-					bind:value={$form.descricao}
-					name="descricao"
-					label="Descrição da Categoria"
-				/>
+<Drawer drawerId="drawer-add">
+	<form method="post" use:enhance>
+		<InputText error={$errors.nome} bind:value={$form.nome} name="nome" label="Nome da Categoria" />
+		<InputTextArea bind:value={$form.descricao} name="descricao" label="Descrição da Categoria" />
 
-				<div class="divider"></div>
-				<button class="btn btn-primary" type="submit">Salvar</button>
-				<button class="btn btn-error" type="reset">Limpar</button>
-			</form>
-		</div>
-	</div>
-</div>
+		<div class="divider"></div>
+		<button class="btn btn-primary" type="submit">Salvar</button>
+		<button class="btn btn-error" type="reset">Limpar</button>
+	</form>
+</Drawer>

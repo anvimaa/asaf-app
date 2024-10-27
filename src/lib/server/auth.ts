@@ -21,7 +21,7 @@ export const lucia = new Lucia(adapter, {
       //@ts-ignore
       name: attributes.name,
       //@ts-ignore
-      isAdmin: attributes.isAdmin,
+      nivelAcesso: attributes.nivelAcesso
     };
   },
 });

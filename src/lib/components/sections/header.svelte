@@ -34,14 +34,16 @@
 					<span class="">SGH - SADISSA</span>
 				</a>
 				{#each app_menu as menu}
-					<a
-						class:active={$page.url.pathname === menu.href}
-						href={menu.href}
-						class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-					>
-						<svelte:component this={menu.icon} />
-						{menu.label}
-					</a>
+					{#if menu.levels?.includes(user.nivelAcesso)}
+						<a
+							class:active={$page.url.pathname === menu.href}
+							href={menu.href}
+							class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+						>
+							<svelte:component this={menu.icon} />
+							{menu.label}
+						</a>
+					{/if}
 				{/each}
 			</nav>
 			<div class="mt-auto"></div>
@@ -69,6 +71,7 @@
 		</DropdownMenu.Trigger>
 		<DropdownMenu.Content align="end">
 			<DropdownMenu.Label><b>{user.name}</b></DropdownMenu.Label>
+			<DropdownMenu.Label><b>{user.nivelAcesso}</b></DropdownMenu.Label>
 			<DropdownMenu.Separator />
 			<DropdownMenu.Item>Perfil</DropdownMenu.Item>
 			<DropdownMenu.Item>Ajuda</DropdownMenu.Item>

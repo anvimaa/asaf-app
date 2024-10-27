@@ -14,7 +14,7 @@
 <Toaster />
 
 <div class="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
-	<SideBar />
+	<SideBar user={data.user} />
 	<div class="flex flex-col">
 		<Header user={data.user} />
 		<main class="p-4">
