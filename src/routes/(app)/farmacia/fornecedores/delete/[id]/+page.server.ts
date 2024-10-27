@@ -4,7 +4,7 @@ import { error, fail, redirect } from '@sveltejs/kit';
 
 export const load = (async ({ params }) => {
     const fornecedor = await db.fornecedor.findUnique({ where: { id: +params.id } })
-    if (!fornecedor) redirect(302, "/farmacia/fornecedors")
+    if (!fornecedor) redirect(302, "/farmacia/fornecedores")
     return { fornecedor };
 }) satisfies PageServerLoad;
 

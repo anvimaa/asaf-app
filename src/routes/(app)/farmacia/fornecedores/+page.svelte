@@ -84,17 +84,25 @@
 	<div class="drawer-side">
 		<label for="drawer-add" aria-label="close sidebar" class="drawer-overlay"></label>
 		<div class="min-h-full w-[50%] bg-zinc-300 p-4 text-base-content dark:bg-zinc-800">
-			<form method="post" use:enhance>
+			<form method="post" use:enhance autocomplete="off">
 				<InputText
 					error={$errors.nome}
 					bind:value={$form.nome}
 					name="nome"
 					label="Nome da Categoria"
 				/>
-				<InputTextArea
-					bind:value={$form.descricao}
-					name="descricao"
-					label="Descrição da Categoria"
+				<InputText error={$errors.nif} bind:value={$form.nif} name="nif" label="nif da Categoria" />
+				<InputText
+					error={$errors.contato}
+					bind:value={$form.contato}
+					name="contato"
+					label="contato da Categoria"
+				/>
+				<InputText
+					error={$errors.endereco}
+					bind:value={$form.endereco}
+					name="endereco"
+					label="endereco da Categoria"
 				/>
 
 				<div class="divider"></div>

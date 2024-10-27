@@ -57,3 +57,12 @@ export const categoriaSchema = z.object({
     nome: z.string().min(1, { message: "Informe o nome" }),
     descricao: z.string().optional(),
 });
+
+export const fornecedorSchema = z.object({
+    id: z.number().int().optional(),
+    nome: z.string().min(1, { message: "Informe o nome" }),
+    nif: z.string().min(1, { message: "Informe o nif" }),
+    contato: z.string().min(1, { message: "Informe o contato" }),
+    endereco: z.string().min(1, { message: "Informe o endereco" }),
+
+});

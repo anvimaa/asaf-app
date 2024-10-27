@@ -3,10 +3,10 @@ import type { Actions, PageServerLoad } from './$types';
 import { db } from '@/server/db';
 import { fail, message, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
-import { categoriaSchema } from '@/schemas';
+import { categoriaSchema, fornecedorSchema } from '@/schemas';
 
 export const load = (async () => {
-    let form = await superValidate(zod(categoriaSchema));
+    let form = await superValidate(zod(fornecedorSchema));
 
     const fornecedores = await db.fornecedor.findMany()
 
@@ -16,7 +16,7 @@ export const load = (async () => {
 
 export const actions: Actions = {
     default: async ({ request }) => {
-        const form = await superValidate(request, zod(categoriaSchema));
+        const form = await superValidate(request, zod(fornecedorSchema));
 
         if (!form.valid) {
             console.log(form.errors);
@@ -26,7 +26,14 @@ export const actions: Actions = {
         const data = form.data
 
         try {
-            const paciente = await db.categoria.create({ data: { nome: data.nome, descricao: data.descricao! } });
+            const paciente = await db.fornecedor.create({
+                data: {
+                    nome: data.nome,
+                    nif: data.nif,
+                    contato: data.contato,
+                    endereco: data.endereco
+                }
+            });
             return message(form, { type: 'success', message: `${paciente.nome} Registrado com sucesso!` });
         } catch (error) {
             console.error(error);
