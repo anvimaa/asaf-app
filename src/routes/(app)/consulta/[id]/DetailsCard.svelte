@@ -101,8 +101,18 @@
 						<Card.Content>
 							<DetailsItem label="Resultado" value={analise.resultado} />
 						</Card.Content>
-						<Card.Footer class="border-t bg-muted/50 px-6 py-3">
+						<Card.Footer class="flex justify-between border-t bg-muted/50 px-6 py-3">
 							<p>Data da análise: {analise.data.toLocaleDateString('pt', formatDate)}</p>
+
+							<Button
+								size="sm"
+								variant="default"
+								class="h-8 gap-1"
+								href="/consulta/analise/{analise.id}"
+							>
+								<Pencil class="h-3.5 w-3.5" />
+								<span class="lg:sr-only xl:not-sr-only xl:whitespace-nowrap"> Atualizar </span>
+							</Button>
 						</Card.Footer>
 					</Card.Root>
 				{/each}

@@ -41,9 +41,12 @@ export const consultaSchema = z.object({
 
 export const analiseSchema = z.object({
     id: z.number().int().optional(),
-    tipo: z.string(),
-    data: z.string().min(1),
+    tipo: z.string().min(1, { message: "Informe o tipo da analise" }),
+    data: z.string().refine((val) => !isNaN(Date.parse(val)), {
+        message: "Data inválida"
+    }),
     resultado: z.string().optional(),
+    obs: z.string().optional(),
 });
 
 export type AnaliseType = z.infer<typeof analiseSchema>;

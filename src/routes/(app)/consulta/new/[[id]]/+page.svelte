@@ -40,7 +40,7 @@
 	};
 
 	function addAnalise(): void {
-		analiseList = [...analiseList, { id: 0, tipo: '', data: '', resultado: '' }];
+		analiseList = [...analiseList, { id: 0, tipo: '', data: new Date(), resultado: '' }];
 	}
 
 	function removeAnalise(index: number): void {

@@ -6,26 +6,12 @@ import { analiseSchema } from '@/schemas';
 
 
 export const load = (async ({ params, request }) => {
-
-    const analise = await db.analise.findUnique({
-        where: { id: +params.id },
-        include: {
-            consulta: {
-                include: {
-                    paciente: true
-                }
-            }
-        }
-    })
-
-    //@ts-ignore
-    let form = await superValidate(analise, zod(analiseSchema));
-
-    return { analise, form };
+    let form = await superValidate(zod(analiseSchema));
+    return { form };
 }) satisfies PageServerLoad;
 
 export const actions: Actions = {
-    default: async ({ request }) => {
+    default: async ({ request, params }) => {
         const form = await superValidate(request, zod(analiseSchema));
 
         if (!form.valid) {
@@ -36,15 +22,16 @@ export const actions: Actions = {
         const data = form.data
 
         try {
-            const analise = await db.analise.update({
-                where: { id: data.id! },
+            const analise = await db.analise.create({
                 data: {
-                    resultado: data.resultado,
-                    tipo: data.tipo
+                    tipo: data.tipo,
+                    resultado: data.resultado! || "",
+                    data: new Date(data.data!),
+                    consultaId: +params.id
                 }
             })
             console.log(analise)
-            return message(form, { type: 'success', message: `Analise atualizada com sucesso!` });
+            return message(form, { type: 'success', message: `Analise registrada com sucesso!` });
         } catch (error) {
             console.error(error);
             return message(form, { type: 'error', message: 'Erro ao Registrar' });

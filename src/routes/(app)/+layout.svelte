@@ -7,6 +7,10 @@
 	export let data: LayoutData;
 </script>
 
+<svelte:head>
+	<title>SHG - SADISSA</title>
+</svelte:head>
+
 <Toaster />
 
 <div class="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button/index.js';
 	import type { PageData } from './$types';
-	import { Plus, ExternalLink } from 'lucide-svelte';
+	import { Plus, ExternalLink, Minus } from 'lucide-svelte';
 	import TableTanStack from '@/components/elements/table/table-tan-stack.svelte';
 	import { renderComponent, type ColumnDef } from '@tanstack/svelte-table';
 
@@ -12,7 +12,7 @@
 
 	export let data: PageData;
 
-	const title = 'Analise';
+	const title = 'Farmacia';
 
 	const columns: ColumnDef<Analise>[] = [
 		{
@@ -50,28 +50,15 @@
 </svelte:head>
 
 <div class="flex flex-col gap-y-4">
-	<div class="">
-<<<<<<< HEAD
-		<p>Consulta: {data.consulta?.tipo}</p>
-		<p>Paciente: {data.consulta?.paciente.nome}</p>
-=======
-		<Button class="mb-2 font-bold text-white" href="/consulta/analise/new/{data.consulta?.id}">
+	<div class="flex gap-2">
+		<Button class="mb-2 font-bold text-white" href="/farmacia/entrada">
 			<Plus />
-			Nova {title}
+			Entrada
 		</Button>
-
-		<Separator />
-
-		<h1 class="mt-2 flex items-center text-3xl font-bold">
-			{data.consulta?.paciente.nome}
-			<a href="/paciente/{data.consulta?.paciente.id}" class="ml-2"> <ExternalLink /></a>
-		</h1>
-		<h2 class="flex items-center text-lg font-bold">
-			Tipo da Consulta: {data.consulta?.tipo}
-			<a href="/consulta/{data.consulta?.id}" class="ml-4"> <ExternalLink size={16} /></a>
-		</h2>
-		<h2 class="text-lg">Medico: <b>{data.consulta?.medico}</b></h2>
->>>>>>> db4d42341ba6aaabfad7ab3be8617351a5041184
+		<Button class="mb-2 font-bold text-white" href="/farmacia/saida">
+			<Minus />
+			Saida
+		</Button>
 	</div>
 
 	<TableTanStack {title} {columns} itens={data.analises}></TableTanStack>

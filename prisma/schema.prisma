@@ -57,6 +57,7 @@ model Paciente {
   consultas        Consulta[]
   internacoes      Internacao[]
   historicoMedicos HistoricoMedico[]
+  prescricoes      Prescricao[]
 }
 
 model HistoricoMedico {
@@ -121,4 +122,77 @@ model Funcionario {
   funcao       String
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+}
+
+// ------------------ Farmácias ----------------
+model Categoria {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  nome         String        @unique
+  descricao    String        @unique
+  medicamentos Medicamento[]
+}
+
+model Fornecedor {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  nome         String
+  nif          String        @unique
+  contato      String
+  endereco     String
+  medicamentos Medicamento[]
+}
+
+model Medicamento {
+  id            Int          @id @default(autoincrement())
+  nome          String // Nome do medicamento
+  tipo          String // Tipo de medicamento (comprimido, líquido, etc.)
+  descricao     String? // Descrição opcional do medicamento
+  dataValidade  DateTime // Data de validade
+  dataEntrada   DateTime     @default(now()) // Data de entrada no estoque
+  estoqueAtual  Int // Quantidade disponível no estoque
+  limiteEstoque Int // Limite mínimo para estoque (alerta de reposição)
+  dosagem       Int? // Dosagem em mg
+  saidas        Saida[] // Relacionamento com saídas
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  prescricoes   Prescricao[]
+
+  categoria   Categoria @relation(fields: [categoriaId], references: [id])
+  categoriaId Int
+
+  fornecedor   Fornecedor @relation(fields: [fornecedorId], references: [id])
+  fornecedorId Int
+}
+
+model Saida {
+  id            Int         @id @default(autoincrement())
+  medicamentoId Int // Referência ao medicamento
+  medicamento   Medicamento @relation(fields: [medicamentoId], references: [id])
+  quantidade    Int // Quantidade retirada do estoque
+  dataSaida     DateTime    @default(now()) // Data da saída
+  motivo        String // Motivo da saída (ex.: Prescrição, descarte, etc.)
+  prescricaoId  Int? // Opcionalmente vinculada a uma prescrição
+  prescricao    Prescricao? @relation(fields: [prescricaoId], references: [id])
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model Prescricao {
+  id             Int         @id @default(autoincrement())
+  pacienteId     Int // Referência ao paciente
+  paciente       Paciente    @relation(fields: [pacienteId], references: [id])
+  medicamentoId  Int // Referência ao medicamento
+  medicamento    Medicamento @relation(fields: [medicamentoId], references: [id])
+  instrucoes     String // Instruções de uso
+  dosagem        Int // Dosagem prescrita em mg
+  frequencia     String // Frequência de uso (ex.: 2x ao dia)
+  dataPrescricao DateTime    @default(now())
+  saidas         Saida[] // Relacionamento com saídas, se houver
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
 }
