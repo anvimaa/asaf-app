@@ -1,3 +1,7 @@
+<script>
+	import Orbit from './Orbit.svelte';
+</script>
+
 <svelte:head>
 	<title>SGH - SADISSA</title>
 </svelte:head>
@@ -10,14 +14,12 @@
 </header>
 
 <!-- Seção Principal -->
-<main class=" h-screen bg-white">
-	<div class="relative overflow-hidden bg-white">
+<main class="h-screen">
+	<div class="relative overflow-hidden">
 		<div class="mx-auto max-w-7xl">
-			<div
-				class="relative z-10 bg-white pb-8 sm:pb-16 md:pb-20 lg:w-full lg:max-w-2xl lg:pb-28 xl:pb-32"
-			>
-				<div class="mx-auto mt-10 max-w-7xl px-4 sm:px-6 lg:px-8">
-					<div class="sm:text-center lg:text-left">
+			<div class="relative z-10 pb-8 sm:pb-16 md:pb-20 lg:w-full lg:max-w-2xl lg:pb-28 xl:pb-32">
+				<div class="mx-auto mt-10 px-4 sm:px-6 lg:px-8">
+					<div class="grid place-items-center sm:text-center lg:text-left">
 						<h2
 							class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-6xl"
 						>

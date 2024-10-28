@@ -51,6 +51,10 @@
 
 <div class="flex flex-col gap-y-4">
 	<div class="">
+<<<<<<< HEAD
+		<p>Consulta: {data.consulta?.tipo}</p>
+		<p>Paciente: {data.consulta?.paciente.nome}</p>
+=======
 		<Button class="mb-2 font-bold text-white" href="/consulta/analise/new/{data.consulta?.id}">
 			<Plus />
 			Nova {title}
@@ -67,6 +71,7 @@
 			<a href="/consulta/{data.consulta?.id}" class="ml-4"> <ExternalLink size={16} /></a>
 		</h2>
 		<h2 class="text-lg">Medico: <b>{data.consulta?.medico}</b></h2>
+>>>>>>> db4d42341ba6aaabfad7ab3be8617351a5041184
 	</div>
 
 	<TableTanStack {title} {columns} itens={data.analises}></TableTanStack>
