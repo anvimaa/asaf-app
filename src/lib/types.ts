@@ -19,3 +19,8 @@ export interface Transation {
     status: string;
     date: Date;
 }
+
+export type SelectListOption = {
+    label: string;
+    value: any;
+};

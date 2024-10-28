@@ -1,0 +1,20 @@
+<script lang="ts">
+	export let label: string;
+	export let name: string;
+	export let value: string | null | undefined = '';
+	export let options: string[];
+</script>
+
+<div class="flex flex-1 items-center gap-x-2">
+	<label for={name} class="label">{label}</label>
+	<select
+		id={name}
+		{name}
+		bind:value
+		class="select select-bordered flex-1 border-zinc-400 bg-zinc-100 dark:border-neutral-600 dark:bg-neutral-800"
+	>
+		{#each options as option}
+			<option value={option}>{option}</option>
+		{/each}
+	</select>
+</div>
