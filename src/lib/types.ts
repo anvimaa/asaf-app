@@ -2,6 +2,7 @@ export interface ItemMenu {
     label: string;
     href: string;
     icon?: any;
+    levels?: string[];
 }
 
 export interface Stat {

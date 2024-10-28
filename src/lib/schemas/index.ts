@@ -50,3 +50,33 @@ export const analiseSchema = z.object({
 });
 
 export type AnaliseType = z.infer<typeof analiseSchema>;
+
+
+export const categoriaSchema = z.object({
+    id: z.number().int().optional(),
+    nome: z.string().min(1, { message: "Informe o nome" }),
+    descricao: z.string().optional(),
+});
+
+export const fornecedorSchema = z.object({
+    id: z.number().int().optional(),
+    nome: z.string().min(1, { message: "Informe o nome" }),
+    nif: z.string().min(1, { message: "Informe o nif" }),
+    contato: z.string().min(1, { message: "Informe o contato" }),
+    endereco: z.string().min(1, { message: "Informe o endereco" }),
+
+});
+
+
+export const medicamentoSchema = z.object({
+    nome: z.string().min(1, { message: "Introduza o nome" }),
+    tipo: z.string().min(1, "Selecione o tipo de remedio"),
+    dataValidade: z.date({ required_error: "Introduza a validade" }),
+    dataEntrada: z.date({ required_error: "Introduza a data de entrada" }),
+    estoqueAtual: z.number().int(),
+    limiteEstoque: z.number().int(),
+    dosagem: z.number().int(),
+    categoriaId: z.number().int(),
+    fornecedorId: z.number().int(),
+    descricao: z.string().optional(),
+});
