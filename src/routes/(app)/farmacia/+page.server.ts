@@ -16,9 +16,13 @@ export const load = (async () => {
             }
         }
     })
+
+    const fornecedores = await db.fornecedor.findMany()
+    const categorias = await db.categoria.findMany()
+
     let form = await superValidate(zod(medicamentoSchema));
 
-    return { medicamentos, form };
+    return { medicamentos, form, fornecedores, categorias };
 
 }) satisfies PageServerLoad;
 

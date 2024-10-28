@@ -15,6 +15,7 @@
 	import DrawerButton from '@/components/elements/drawer-button.svelte';
 	import NumberInput from '@/components/elements/form/NumberInput.svelte';
 	import DateInput from '@/components/elements/form/DateInput.svelte';
+	import SelectListInput from '@/components/elements/SelectListInput.svelte';
 
 	export let data: PageData;
 
@@ -27,6 +28,14 @@
 			toast.success($message.message);
 		}
 	}
+
+	$: fornecedores = data.fornecedores.map((b) => {
+		return { value: b.id, label: b.nome };
+	});
+
+	$: categorias = data.categorias.map((b) => {
+		return { value: b.id, label: b.nome };
+	});
 
 	const title = 'Farmacia';
 
@@ -157,17 +166,18 @@
 		</div>
 
 		<div class="grid gap-2 md:grid-cols-2">
-			<NumberInput
+			<SelectListInput
+				bind:value={$form.categoriaId}
 				name="categoriaId"
 				label="Categoria"
-				error={$errors.categoriaId}
-				bind:value={$form.categoriaId}
+				options={categorias}
 			/>
-			<NumberInput
+
+			<SelectListInput
+				bind:value={$form.fornecedorId}
 				name="fornecedorId"
 				label="Fornecedor"
-				error={$errors.fornecedorId}
-				bind:value={$form.fornecedorId}
+				options={fornecedores}
 			/>
 		</div>
 
