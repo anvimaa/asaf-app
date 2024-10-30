@@ -12,12 +12,8 @@ export const load = (async ({ url }) => {
 
     const analises = await db.analise.findMany({ where: { consultaId: +consultaId } })
     const consulta = await db.consulta.findUnique({
-<<<<<<< HEAD
-        where: { id: +consultaId }, include: {
-=======
         where: { id: +consultaId },
         include: {
->>>>>>> db4d42341ba6aaabfad7ab3be8617351a5041184
             paciente: true
         }
     })
