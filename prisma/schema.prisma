@@ -140,11 +140,11 @@ model Fornecedor {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  nome         String
-  nif          String        @unique
-  contato      String
-  endereco     String
-  medicamentos Medicamento[]
+  nome     String
+  nif      String    @unique
+  contato  String
+  endereco String
+  entradas Entrada[]
 }
 
 model Medicamento {
@@ -153,8 +153,7 @@ model Medicamento {
   tipo          String // Tipo de medicamento (comprimido, líquido, etc.)
   descricao     String? // Descrição opcional do medicamento
   dataValidade  DateTime // Data de validade
-  dataEntrada   DateTime     @default(now()) // Data de entrada no estoque
-  estoqueAtual  Int // Quantidade disponível no estoque
+  estoqueAtual  Int?         @default(0) // Quantidade disponível no estoque
   limiteEstoque Int // Limite mínimo para estoque (alerta de reposição)
   dosagem       Int? // Dosagem em mg
   saidas        Saida[] // Relacionamento com saídas
@@ -163,8 +162,7 @@ model Medicamento {
   prescricoes   Prescricao[]
   categoria     Categoria    @relation(fields: [categoriaId], references: [id])
   categoriaId   Int
-  fornecedor    Fornecedor   @relation(fields: [fornecedorId], references: [id])
-  fornecedorId  Int
+  entradas      Entrada[]
 }
 
 model Saida {
@@ -193,4 +191,18 @@ model Prescricao {
   saidas         Saida[] // Relacionamento com saídas, se houver
   createdAt      DateTime    @default(now())
   updatedAt      DateTime    @updatedAt
+}
+
+model Entrada {
+  id          Int      @id @default(autoincrement())
+  quantidade  Int // Quantidade retirada do estoque
+  dataEntrada DateTime
+
+  medicamentoId Int // Referência ao medicamento
+  medicamento   Medicamento @relation(fields: [medicamentoId], references: [id])
+  fornecedorId  Int
+  fornecedor    Fornecedor  @relation(fields: [fornecedorId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

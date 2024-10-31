@@ -1,4 +1,4 @@
-import { ContactRound, LayoutDashboard, Microscope, BriefcaseMedical } from "lucide-svelte";
+import { ContactRound, LayoutDashboard, Microscope, BriefcaseMedical, Contact, ChartLine } from "lucide-svelte";
 import type { ItemMenu } from "./types";
 
 export const app_menu: ItemMenu[] = [
@@ -25,5 +25,18 @@ export const app_menu: ItemMenu[] = [
         href: "/farmacia",
         icon: BriefcaseMedical,
         levels: ["a", "f"]
+    },
+    {
+        label: "Funcionários",
+        href: "/funcionario",
+        icon: Contact,
+        levels: ["a", "r"]
+    },
+
+    {
+        label: "Relatórios",
+        href: "/relatorios",
+        icon: ChartLine,
+        levels: ["a"]
     },
 ]

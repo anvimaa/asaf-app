@@ -2,6 +2,7 @@
 	import { ArrowLeft } from 'lucide-svelte';
 
 	export let drawerId: string = 'drawer-add';
+	export let title: string = 'Cadastrar';
 </script>
 
 <div class="drawer drawer-end">
@@ -20,7 +21,7 @@
 				>
 					<ArrowLeft />
 				</label>
-				<h1 class="text-2xl font-bold">Cadastrar</h1>
+				<h1 class="text-2xl font-bold">{title}</h1>
 			</div>
 			<div class="divider"></div>
 			<slot />

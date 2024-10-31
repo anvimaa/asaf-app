@@ -12,5 +12,5 @@
 			<span class="text-sm text-red-500">{error}</span>
 		{/if}
 	</label>
-	<input type="datetime-local" class="input input-bordered" id={name} {name} bind:value />
+	<input type="date" class="input input-bordered" id={name} {name} bind:value />
 </div>

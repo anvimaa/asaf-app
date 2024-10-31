@@ -72,11 +72,9 @@ export const medicamentoSchema = z.object({
     nome: z.string().min(1, { message: "Introduza o nome" }),
     tipo: z.string().min(1, "Selecione o tipo de remedio"),
     dataValidade: z.date({ required_error: "Introduza a validade" }),
-    dataEntrada: z.date({ required_error: "Introduza a data de entrada" }),
     estoqueAtual: z.number().int(),
     limiteEstoque: z.number().int(),
     dosagem: z.number().int(),
     categoriaId: z.number().int(),
-    fornecedorId: z.number().int(),
     descricao: z.string().optional(),
 });

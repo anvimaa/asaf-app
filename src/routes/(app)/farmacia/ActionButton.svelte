@@ -6,7 +6,7 @@
 	import { InfoIcon, Pencil, Trash } from 'lucide-svelte';
 
 	export let id: number;
-	export let route = 'consulta/analise';
+	export let route = 'farmacia';
 </script>
 
 <DropdownMenu.Root>
