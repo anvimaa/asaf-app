@@ -19,7 +19,14 @@
 	}
 </script>
 
-<form method="post" use:enhance class="grid gap-4" action="?/cadastrar">
+<div class="mb-8 flex items-center justify-between">
+	<div>
+		<h1 class="text-2xl font-bold">Editar Funcionário</h1>
+		<p class="text-gray-500">Atualize as informações do funcionário</p>
+	</div>
+</div>
+
+<form method="post" use:enhance class="grid gap-4">
 	<input type="hidden" name="id" value={$form.id} />
 	<InputText name="nome" label="Nome" error={$errors.nome} bind:value={$form.nome} />
 
@@ -66,8 +73,9 @@
 	<InputText name="agente" label="Agente" error={$errors.agente} bind:value={$form.agente} />
 
 	<div class="divider"></div>
-	<div class="grid grid-cols-2 gap-2">
+	<div class="grid grid-cols-3 gap-2">
 		<button class="btn btn-primary" type="submit">Salvar</button>
 		<button class="btn btn-error" type="reset">Limpar</button>
+		<a href="/funcionario" class="btn btn-secondary">Voltar</a>
 	</div>
 </form>

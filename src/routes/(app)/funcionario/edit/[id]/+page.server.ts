@@ -18,6 +18,7 @@ export const load = (async ({ params }) => {
     if (id !== undefined) {
         const funcionario = await db.funcionario.findUnique({ where: { id: +id } });
         if (!funcionario) error(404, "Funcionario não encontrado")
+        //@ts-ignore
         form = await superValidate(funcionario, zod(funcionarioCrud));
     }
 
