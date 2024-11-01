@@ -3,5 +3,9 @@
 	import { ModeWatcher } from 'mode-watcher';
 </script>
 
+<svelte:head>
+	<title>SADISSA</title>
+</svelte:head>
+
 <ModeWatcher />
 <slot />

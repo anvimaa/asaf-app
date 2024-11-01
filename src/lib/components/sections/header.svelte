@@ -15,6 +15,7 @@
 	import * as Sheet from '$lib/components/ui/sheet/index.js';
 	import ThemeDropdown from '../elements/theme-dropdown.svelte';
 	import { app_menu } from '@/menus';
+	import Logo from '../elements/logo.svelte';
 
 	export let user: any;
 </script>
@@ -29,9 +30,8 @@
 		</Sheet.Trigger>
 		<Sheet.Content side="left" class="flex flex-col">
 			<nav class="grid gap-2 text-lg font-medium">
-				<a href="##" class="flex items-center gap-2 text-lg font-semibold">
-					<Package2 class="h-6 w-6" />
-					<span class="">SGH - SADISSA</span>
+				<a href="/dashboard" class="flex items-center gap-2 text-lg font-semibold">
+					<Logo />
 				</a>
 				{#each app_menu as menu}
 					{#if menu.levels?.includes(user.nivelAcesso)}

@@ -1,96 +1,6 @@
 <script lang="ts">
-	const servicos = [
-		{
-			icon: '<svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>',
-			titulo: 'Gestão de Pacientes',
-			descricao: 'Controle completo do histórico e informações dos pacientes.'
-		},
-		{
-			icon: '<svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>',
-			titulo: 'Gestão de Funcionários',
-			descricao: 'Administre equipes e escalas de trabalho eficientemente.'
-		},
-		{
-			icon: '<svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>',
-			titulo: 'Relatórios Inteligentes',
-			descricao: 'Análises e relatórios detalhados para tomada de decisões.'
-		},
-		{
-			icon: '<svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>',
-			titulo: 'Gestão de Farmácia',
-			descricao: 'Controle de estoque, dispensação e rastreamento de medicamentos.'
-		},
-		{
-			icon: '<svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>',
-			titulo: 'Análises Laboratoriais',
-			descricao: 'Gestão de exames, resultados e integração com laboratórios.'
-		},
-		{
-			icon: '<svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>',
-			titulo: 'Gestão de Consultas',
-			descricao: 'Agendamento, histórico e acompanhamento de consultas médicas.'
-		},
-		{
-			icon: '<svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>',
-			titulo: 'Gestão Financeira',
-			descricao: 'Controle de receitas, despesas e faturamento hospitalar.'
-		},
-		{
-			icon: '<svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>',
-			titulo: 'Controle de Medicamentos',
-			descricao: 'Rastreamento de entrada e saída de medicamentos e insumos.'
-		},
-		{
-			icon: '<svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>',
-			titulo: 'Prontuário Eletrônico',
-			descricao: 'Registro digital completo do histórico dos pacientes.'
-		},
-		{
-			icon: '<svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>',
-			titulo: 'Gestão de Qualidade',
-			descricao: 'Monitoramento de indicadores e processos hospitalares.'
-		}
-	];
-
-	const faqs = [
-		{
-			pergunta: 'Como começar a usar o sistema?',
-			resposta:
-				'Basta criar uma conta e fazer login. Nossa equipe irá auxiliar na configuração inicial.'
-		},
-		{
-			pergunta: 'O sistema é seguro?',
-			resposta: 'Sim, utilizamos as mais avançadas tecnologias de segurança e criptografia.'
-		},
-		{
-			pergunta: 'Existe suporte técnico?',
-			resposta: 'Oferecemos suporte 24/7 para todos os nossos clientes.'
-		},
-		{
-			pergunta: 'Qual o tempo médio de implantação do sistema?',
-			resposta: 'O processo de implantação leva em média 30 dias, incluindo treinamento da equipe.'
-		},
-		{
-			pergunta: 'O sistema pode ser personalizado?',
-			resposta:
-				'Sim, podemos adaptar várias funcionalidades de acordo com as necessidades específicas do seu hospital.'
-		},
-		{
-			pergunta: 'Como é feito o backup dos dados?',
-			resposta:
-				'Realizamos backups automáticos diários e mantemos redundância em diferentes servidores para garantir a segurança dos dados.'
-		},
-		{
-			pergunta: 'O sistema está de acordo com a LGPD?',
-			resposta:
-				'Sim, nosso sistema segue todas as diretrizes da Lei Geral de Proteção de Dados e outras regulamentações pertinentes.'
-		},
-		{
-			pergunta: 'É possível acessar o sistema via dispositivos móveis?',
-			resposta:
-				'Sim, o sistema é responsivo e pode ser acessado através de smartphones e tablets, além de computadores.'
-		}
-	];
+	import { servicos, faqs } from '$lib/constants';
+	import Logo from '$lib/components/elements/logo.svelte';
 
 	// Adicionar estado para controlar FAQs abertos
 	let faqAberto = -1;
@@ -142,33 +52,7 @@
 	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 		<div class="flex h-16 items-center justify-between">
 			<div class="flex-shrink-0">
-				<svg
-					class="h-8 w-auto text-indigo-600"
-					viewBox="0 0 160 40"
-					fill="none"
-					xmlns="http://www.w3.org/2000/svg"
-				>
-					<!-- Símbolo de batimento cardíaco + cruz -->
-					<path
-						d="M10 20 L20 20 L25 10 L30 30 L35 20 L45 20"
-						stroke="currentColor"
-						stroke-width="3"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-					/>
-					<!-- Texto SADISSA -->
-					<text
-						x="55"
-						y="27"
-						fill="currentColor"
-						font-family="Inter, sans-serif"
-						font-weight="600"
-						font-size="14"
-						letter-spacing="0.05em"
-					>
-						SADISSA
-					</text>
-				</svg>
+				<Logo />
 			</div>
 			<div class="hidden items-center space-x-8 md:flex">
 				<a href="#servicos" class="text-gray-700 hover:text-indigo-600">Serviços</a>
@@ -461,31 +345,7 @@
 	<div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
 		<div class="grid grid-cols-1 gap-8 md:grid-cols-4">
 			<div>
-				<svg
-					class="h-8 w-auto text-white"
-					viewBox="0 0 160 40"
-					fill="none"
-					xmlns="http://www.w3.org/2000/svg"
-				>
-					<path
-						d="M10 20 L20 20 L25 10 L30 30 L35 20 L45 20"
-						stroke="currentColor"
-						stroke-width="3"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-					/>
-					<text
-						x="55"
-						y="27"
-						fill="currentColor"
-						font-family="Inter, sans-serif"
-						font-weight="600"
-						font-size="14"
-						letter-spacing="0.05em"
-					>
-						SADISSA
-					</text>
-				</svg>
+				<Logo color="white" />
 				<p class="mt-4 text-gray-400">Simplificando a gestão hospitalar desde 2024.</p>
 			</div>
 			<div>

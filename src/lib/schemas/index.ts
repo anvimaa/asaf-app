@@ -93,3 +93,21 @@ export const funcionarioSchema = z.object({
     }),
     funcao: z.string().min(1, { message: "Função é obrigatória" }),
 });
+
+export const patrimonioSchema = z.object({
+    nome: z.string().min(1, { message: "Nome é obrigatório" }),
+    codigo: z.string().min(1, { message: "Código é obrigatório" }),
+    tipo: z.string().min(1, { message: "Tipo é obrigatório" }),
+    estado: z.string().min(1, { message: "Estado é obrigatório" }),
+    valor: z.number().min(0, { message: "Valor deve ser maior que 0" }),
+    dataAquisicao: z.date({
+        required_error: "Data de aquisição é obrigatória",
+        invalid_type_error: "Data de aquisição inválida"
+    }),
+    localizacao: z.string().min(1, { message: "Localização é obrigatória" }),
+    observacoes: z.string().optional(),
+    garantia: z.boolean().default(false),
+    dataGarantia: z.date().optional(),
+    ultimaManutencao: z.date().optional(),
+    proximaManutencao: z.date().optional()
+});

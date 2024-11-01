@@ -1,4 +1,4 @@
-import { ContactRound, LayoutDashboard, Microscope, BriefcaseMedical, Contact, ChartLine } from "lucide-svelte";
+import { ContactRound, LayoutDashboard, Microscope, BriefcaseMedical, Contact, ChartLine, WalletCards } from "lucide-svelte";
 import type { ItemMenu } from "./types";
 
 export const app_menu: ItemMenu[] = [
@@ -27,13 +27,17 @@ export const app_menu: ItemMenu[] = [
         levels: ["a", "f"]
     },
     {
-        label: "Funcionários",
+        label: "RH",
         href: "/funcionario",
         icon: Contact,
         levels: ["a", "r"]
     },
-
     {
+        label: "Património",
+        href: "/patrimonio",
+        icon: WalletCards,
+        levels: ["a"]
+    }, {
         label: "Relatórios",
         href: "/relatorios",
         icon: ChartLine,

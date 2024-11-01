@@ -206,3 +206,27 @@ model Entrada {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model Patrimonio {
+  id            Int      @id @default(autoincrement())
+  nome          String // Nome/descrição do bem
+  codigo        String   @unique // Código de identificação único
+  tipo          String // Tipo do bem (ex: equipamento, móvel, imóvel)
+  estado        String // Estado de conservação
+  valor         Float // Valor do bem
+  dataAquisicao DateTime // Data de aquisição
+  localizacao   String // Localização física do bem
+  observacoes   String? // Observações adicionais
+
+  // Informações de garantia
+  garantia     Boolean   @default(false) // Se possui garantia
+  dataGarantia DateTime? // Data de validade da garantia
+
+  // Informações de manutenção
+  ultimaManutencao  DateTime? // Data da última manutenção
+  proximaManutencao DateTime? // Data prevista próxima manutenção
+
+  // Campos de auditoria
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

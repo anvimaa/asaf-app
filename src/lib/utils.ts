@@ -101,3 +101,27 @@ export function convertToDateTimeLocalFormat(
 	}
 	return "";
 }
+
+export function gerarCodigoUnico(texto: string = ''): string {
+	// Pega todas as letras do texto em maiúsculo
+	const todasLetras = texto
+		.toUpperCase()
+		.replace(/[^A-Z]/g, ''); // Remove caracteres não alfabéticos
+
+	// Seleciona 5 letras aleatórias do texto
+	let letras = '';
+	for (let i = 0; i < 7; i++) {
+		if (todasLetras.length > 0) {
+			const indiceAleatorio = Math.floor(Math.random() * todasLetras.length);
+			letras += todasLetras[indiceAleatorio];
+		} else {
+			letras += 'X';
+		}
+	}
+
+	// Gera números baseados no timestamp atual
+	const timestamp = Date.now().toString();
+	const numeros = timestamp.slice(-4); // Pega os últimos 4 dígitos
+
+	return `${letras}-${numeros}`;
+}
