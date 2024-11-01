@@ -166,7 +166,7 @@
 			</div>
 			<div class="relative">
 				<img
-					src="https://pixselo.com/wp-content/uploads/2023/07/hospital-management-software-img.png"
+					src="/preview-sadissa.png"
 					alt="Dashboard Preview"
 					class="rounded-lg shadow-xl"
 				/>
