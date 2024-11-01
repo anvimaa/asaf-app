@@ -86,14 +86,7 @@
 		<div>
 			<DrawerButton>
 				<ClipboardPlus />
-				Cadastrar Património
-			</DrawerButton>
-		</div>
-
-		<div>
-			<DrawerButton drawerId="drawer-entrada">
-				<Plus />
-				Entradas
+				Novo Património
 			</DrawerButton>
 		</div>
 	</div>
