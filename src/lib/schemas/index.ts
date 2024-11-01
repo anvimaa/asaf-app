@@ -78,3 +78,18 @@ export const medicamentoSchema = z.object({
     categoriaId: z.number().int(),
     descricao: z.string().optional(),
 });
+
+
+export const funcionarioSchema = z.object({
+    nome: z.string().min(1, { message: "Nome é obrigatório" }),
+    genero: z.string().min(1, { message: "Gênero é obrigatório" }),
+    nif: z.string().min(1, { message: "NIF é obrigatório" }),
+    agente: z.string().optional(),
+    endereco: z.string().min(1, { message: "Endereço é obrigatório" }),
+    telefone: z.string().min(1, { message: "Telefone é obrigatório" }),
+    dataAdmissao: z.date({
+        required_error: "Data de admissão é obrigatória",
+        invalid_type_error: "Data de admissão inválida"
+    }),
+    funcao: z.string().min(1, { message: "Função é obrigatória" }),
+});
