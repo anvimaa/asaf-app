@@ -140,7 +140,7 @@
 			</h1>
 			<p class="mx-auto mt-6 max-w-2xl text-xl text-gray-500 dark:text-gray-300">
 				Gerencie de forma eficiente os pacientes, funcionários e operações do hospital com o nosso
-				sistema completo de gestão.
+				sistema completo e moderno de gestão.
 			</p>
 			<div class="mt-10">
 				<a
