@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { servicos, faqs, parceiros, testemunhos } from '@/constants';
 	import Logo from '@/components/elements/logo.svelte';
+	let BREVO_API_KEY =
+		'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';
 
 	// Adicionar estado para controlar FAQs abertos
 	let faqAberto = -1;
@@ -23,24 +25,32 @@
 		event.preventDefault();
 		const formData = new FormData(event.target as HTMLFormElement);
 
+		const data = {
+			nome: formData.get('nome') as string,
+			email: formData.get('email') as string,
+			telefone: formData.get('telefone') as string,
+			assunto: formData.get('assunto') as string,
+			mensagem: formData.get('mensagem') as string
+		};
+
 		try {
 			const response = await fetch('https://api.brevo.com/v3/smtp/email', {
 				method: 'POST',
 				headers: {
 					accept: 'application/json',
-					'api-key': 'SUA_API_KEY_AQUI',
+					'api-key': BREVO_API_KEY,
 					'content-type': 'application/json'
 				},
 				body: JSON.stringify({
-					sender: { email: formData.get('email'), name: formData.get('nome') },
-					to: [{ email: 'seu-email@dominio.com', name: 'Destinatário' }],
-					subject: `Novo contato via site: ${formData.get('assunto')}`,
+					sender: { email: data.email, name: data.nome },
+					to: [{ email: 'amantentesoft@gmail.com', name: 'SADISSA' }],
+					subject: `Novo contato via site: ${data.assunto}`,
 					htmlContent: `
-						<p><strong>Nome:</strong> ${formData.get('nome')}</p>
-						<p><strong>Email:</strong> ${formData.get('email')}</p>
-						<p><strong>Telefone:</strong> ${formData.get('telefone') || 'Não informado'}</p>
-						<p><strong>Assunto:</strong> ${formData.get('assunto')}</p>
-						<p><strong>Mensagem:</strong> ${formData.get('mensagem')}</p>
+						<p><strong>Nome:</strong> ${data.nome}</p>
+						<p><strong>Email:</strong> ${data.email}</p>
+						<p><strong>Telefone:</strong> ${data.telefone || 'Não informado'}</p>
+						<p><strong>Assunto:</strong> ${data.assunto}</p>
+						<p><strong>Mensagem:</strong> ${data.mensagem}</p>
 					`
 				})
 			});
@@ -375,7 +385,7 @@
 			Entre em Contato
 		</h2>
 		<div class="mx-auto max-w-xl">
-			<form class="space-y-6">
+			<form class="space-y-6" on:submit={handleSubmit}>
 				<div class="relative">
 					<label for="nome" class="block text-sm font-medium text-gray-700 dark:text-gray-300"
 						>Nome</label
@@ -398,7 +408,9 @@
 						</div>
 						<input
 							type="text"
+							required
 							id="nome"
+							name="nome"
 							class="block w-full rounded-lg border border-gray-300 bg-white py-2.5 pl-10 pr-3 text-gray-900 placeholder-gray-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
 							placeholder="Seu nome completo"
 						/>
@@ -427,7 +439,9 @@
 						</div>
 						<input
 							type="email"
+							required
 							id="email"
+							name="email"
 							class="block w-full rounded-lg border border-gray-300 bg-white py-2.5 pl-10 pr-3 text-gray-900 placeholder-gray-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
 							placeholder="seu@email.com"
 						/>
@@ -517,6 +531,8 @@
 						</div>
 						<textarea
 							id="mensagem"
+							name="mensagem"
+							required
 							rows="4"
 							class="block w-full rounded-lg border border-gray-300 bg-white py-2.5 pl-10 pr-3 text-gray-900 placeholder-gray-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
 							placeholder="Digite sua mensagem aqui..."
