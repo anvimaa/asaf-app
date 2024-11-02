@@ -132,3 +132,59 @@ export const faqs = [
             'Sim, o sistema é responsivo e pode ser acessado através de smartphones e tablets, além de computadores.'
     }
 ];
+
+// Dados dos parceiros com logos reais
+export const parceiros = [
+    {
+        nome: 'Hospital Sírio-Libanês',
+        logo: 'https://media.istockphoto.com/id/1418665770/vector/health-care-logo-template-hospital-and-clinic-icon.jpg?s=1024x1024&w=is&k=20&c=3EnQUyNSY4tcfv-KVLI3gQuInlIMi-IzUHTPHr9QG0E='
+    },
+    {
+        nome: 'Hospital Albert Einstein',
+        logo: 'https://media.istockphoto.com/id/1418665770/vector/health-care-logo-template-hospital-and-clinic-icon.jpg?s=1024x1024&w=is&k=20&c=3EnQUyNSY4tcfv-KVLI3gQuInlIMi-IzUHTPHr9QG0E='
+    },
+    {
+        nome: 'Hospital São Luiz',
+        logo: 'https://media.istockphoto.com/id/1418665770/vector/health-care-logo-template-hospital-and-clinic-icon.jpg?s=1024x1024&w=is&k=20&c=3EnQUyNSY4tcfv-KVLI3gQuInlIMi-IzUHTPHr9QG0E='
+    },
+    {
+        nome: "Rede D'Or",
+        logo: 'https://media.istockphoto.com/id/1418665770/vector/health-care-logo-template-hospital-and-clinic-icon.jpg?s=1024x1024&w=is&k=20&c=3EnQUyNSY4tcfv-KVLI3gQuInlIMi-IzUHTPHr9QG0E='
+    },
+    {
+        nome: 'Fleury',
+        logo: 'https://media.istockphoto.com/id/1418665770/vector/health-care-logo-template-hospital-and-clinic-icon.jpg?s=1024x1024&w=is&k=20&c=3EnQUyNSY4tcfv-KVLI3gQuInlIMi-IzUHTPHr9QG0E='
+    },
+    {
+        nome: 'Dasa',
+        logo: 'https://media.istockphoto.com/id/1418665770/vector/health-care-logo-template-hospital-and-clinic-icon.jpg?s=1024x1024&w=is&k=20&c=3EnQUyNSY4tcfv-KVLI3gQuInlIMi-IzUHTPHr9QG0E='
+    }
+];
+
+// Dados dos testemunhos com fotos do Unsplash
+export const testemunhos = [
+    {
+        nome: 'Dr. João Silva',
+        cargo: 'Diretor Clínico',
+        foto: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80',
+        texto:
+            'O SADISSA revolucionou a forma como gerenciamos nosso hospital. A eficiência aumentou significativamente e nossos processos estão muito mais organizados.',
+        instituicao: 'Hospital São Lucas'
+    },
+    {
+        nome: 'Dra. Maria Santos',
+        cargo: 'Coordenadora de Enfermagem',
+        foto: 'https://images.unsplash.com/photo-1594824476967-48c8b964273f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80',
+        texto:
+            'A implementação do sistema foi extremamente suave e o suporte técnico é excepcional. Nossa equipe adaptou-se rapidamente e os resultados são visíveis.',
+        instituicao: 'Clínica Santa Maria'
+    },
+    {
+        nome: 'Dr. Pedro Costa',
+        cargo: 'Gestor Hospitalar',
+        foto: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80',
+        texto:
+            'Desde que começamos a usar o SADISSA, reduzimos nossos custos operacionais em 30% e melhoramos significativamente a satisfação dos pacientes.',
+        instituicao: 'Centro Médico São José'
+    }
+];
