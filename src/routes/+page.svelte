@@ -1,14 +1,16 @@
 <script lang="ts">
 	import { servicos, faqs, parceiros, testemunhos } from '@/constants';
 	import Logo from '@/components/elements/logo.svelte';
-	let BREVO_API_KEY =
-		'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';
+	import { PUBLIC_BREVO_API_KEY } from '$env/static/public';
 
 	// Adicionar estado para controlar FAQs abertos
 	let faqAberto = -1;
 
 	// Adicionar estado para o tema
 	let temaDark = false;
+
+	// Adicionar estado para menu mobile
+	let menuMobileAberto = false;
 
 	// Função para alternar o tema
 	const alternarTema = () => {
@@ -38,7 +40,7 @@
 				method: 'POST',
 				headers: {
 					accept: 'application/json',
-					'api-key': BREVO_API_KEY,
+					'api-key': PUBLIC_BREVO_API_KEY,
 					'content-type': 'application/json'
 				},
 				body: JSON.stringify({
@@ -66,6 +68,11 @@
 			console.error(error);
 		}
 	};
+
+	// Função para alternar menu mobile
+	const alternarMenuMobile = () => {
+		menuMobileAberto = !menuMobileAberto;
+	};
 </script>
 
 <!-- Navegação -->
@@ -75,6 +82,38 @@
 			<div class="flex-shrink-0">
 				<Logo color={temaDark ? 'white' : 'indigo'} />
 			</div>
+
+			<!-- Botão do menu mobile -->
+			<div class="flex md:hidden">
+				<button
+					type="button"
+					class="inline-flex items-center justify-center rounded-md p-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-200 dark:hover:bg-gray-700"
+					on:click={alternarMenuMobile}
+				>
+					<span class="sr-only">Abrir menu</span>
+					{#if menuMobileAberto}
+						<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M6 18L18 6M6 6l12 12"
+							/>
+						</svg>
+					{:else}
+						<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M4 6h16M4 12h16M4 18h16"
+							/>
+						</svg>
+					{/if}
+				</button>
+			</div>
+
+			<!-- Menu desktop -->
 			<div class="hidden items-center space-x-8 md:flex">
 				<a href="#servicos" class="text-gray-700 hover:text-indigo-600 dark:text-gray-200"
 					>Serviços</a
@@ -83,13 +122,16 @@
 				<a href="#contato" class="text-gray-700 hover:text-indigo-600 dark:text-gray-200">Contato</a
 				>
 				<button
-					on:click={alternarTema}
-					class="rounded-full p-2 hover:bg-gray-100 dark:hover:bg-gray-700"
-					aria-label="Alternar tema"
+					on:click={() => {
+						alternarTema();
+						alternarMenuMobile();
+					}}
+					class="flex w-full items-center rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700"
 				>
 					{#if temaDark}
+						<span>Modo Claro</span>
 						<svg
-							class="h-6 w-6 text-yellow-500"
+							class="ml-2 h-5 w-5 text-yellow-500"
 							fill="none"
 							stroke="currentColor"
 							viewBox="0 0 24 24"
@@ -102,8 +144,9 @@
 							/>
 						</svg>
 					{:else}
+						<span>Modo Escuro</span>
 						<svg
-							class="h-6 w-6 text-gray-700"
+							class="ml-2 h-5 w-5 text-gray-700"
 							fill="none"
 							stroke="currentColor"
 							viewBox="0 0 24 24"
@@ -125,6 +168,42 @@
 				</a>
 			</div>
 		</div>
+
+		<!-- Menu mobile -->
+		{#if menuMobileAberto}
+			<div class="md:hidden">
+				<div class="space-y-1 px-2 pb-3 pt-2">
+					<a
+						href="#servicos"
+						class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-indigo-600 dark:text-gray-200 dark:hover:bg-gray-700"
+						on:click={alternarMenuMobile}
+					>
+						Serviços
+					</a>
+					<a
+						href="#faq"
+						class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-indigo-600 dark:text-gray-200 dark:hover:bg-gray-700"
+						on:click={alternarMenuMobile}
+					>
+						FAQ
+					</a>
+					<a
+						href="#contato"
+						class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-indigo-600 dark:text-gray-200 dark:hover:bg-gray-700"
+						on:click={alternarMenuMobile}
+					>
+						Contato
+					</a>
+					<a
+						href="/login"
+						class="block rounded-md bg-indigo-600 px-3 py-2 text-base font-medium text-white hover:bg-indigo-700"
+						on:click={alternarMenuMobile}
+					>
+						Entrar
+					</a>
+				</div>
+			</div>
+		{/if}
 	</div>
 </nav>
 
@@ -228,7 +307,7 @@
 			<div class="relative">
 				<img src="/preview-sadissa.png" alt="Dashboard Preview" class="rounded-lg shadow-xl" />
 				<div class="absolute -bottom-6 -right-6 rounded-lg bg-indigo-600 p-4 text-white">
-					<p class="font-bold">+1000 hospitais</p>
+					<p class="font-bold">+10 hospitais e clínicas</p>
 					<p class="text-sm">já utilizam nossa solução</p>
 				</div>
 			</div>
@@ -272,7 +351,7 @@
 						<img
 							src={parceiro.logo}
 							alt={parceiro.nome}
-							class="h-12 w-auto object-contain filter transition-all duration-300 hover:scale-110 hover:filter-none dark:brightness-0 dark:invert"
+							class="h-12 w-auto object-contain filter transition-all duration-300 hover:scale-110 hover:filter-none"
 						/>
 					</div>
 				{/each}
