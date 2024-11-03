@@ -27,6 +27,12 @@
 		}
 	}
 
+	$: pacientes = data.pacientes.map((paciente) => ({
+		id: paciente.id,
+		nome: paciente.nome,
+		nif: paciente.nif
+	}));
+
 	let analiseList: AnaliseType[] = [];
 	let tipoConsulta: string = '';
 
@@ -37,6 +43,13 @@
 		descricao: '',
 		data: '',
 		tipoConsulta: ''
+	};
+
+	let formErrors = {
+		medico: false,
+		pacienteId: false,
+		data: false,
+		tipoConsulta: false
 	};
 
 	function addAnalise(): void {
@@ -51,8 +64,24 @@
 		analiseList = [];
 	}
 
+	function validateForm(): boolean {
+		formErrors = {
+			medico: !formState.medico,
+			pacienteId: !formState.pacienteId,
+			data: !formState.data,
+			tipoConsulta: !formState.tipoConsulta
+		};
+
+		return !Object.values(formErrors).some((error) => error);
+	}
+
 	async function handleSubmit(event: SubmitEvent) {
 		event.preventDefault();
+
+		if (!validateForm()) {
+			toast.error('Por favor, preencha todos os campos obrigatórios');
+			return;
+		}
 
 		const formData = new FormData(event.target as HTMLFormElement);
 
@@ -96,10 +125,15 @@
 		</Card.Header>
 		<Card.Content>
 			<div class="grid gap-2 md:grid-cols-2">
-				<ComboPacientes pacientes={data.pacientes} name="pacienteId" />
+				<ComboPacientes {pacientes} name="pacienteId" />
+				{#if formErrors.pacienteId}
+					<p class="text-sm text-red-500">Selecione um paciente</p>
+				{/if}
 
 				<div class="grid gap-3">
-					<Label for="tipoConsulta">Tipo de Consulta</Label>
+					<Label for="tipoConsulta">
+						Tipo de Consulta <span class="text-red-500">*</span>
+					</Label>
 					<Select.Root
 						selected={{ value: '', label: '' }}
 						onSelectedChange={(v) => {
@@ -115,24 +149,39 @@
 							{/each}
 						</Select.Content>
 					</Select.Root>
-					<input type="hidden" name="tipoConsulta" bind:value={formState.tipoConsulta} />
+					{#if formErrors.tipoConsulta}
+						<p class="text-sm text-red-500">Selecione o tipo de consulta</p>
+					{/if}
 				</div>
 			</div>
 
 			<div class="mb-2 grid gap-2 md:grid-cols-2">
 				<div class="w-full">
-					<Label for="medico">Medico do Paciente</Label>
+					<Label for="medico">
+						Médico do Paciente <span class="text-red-500">*</span>
+					</Label>
 					<Input
 						id="medico"
 						name="medico"
 						bind:value={formState.medico}
-						placeholder="medico do paciente"
+						placeholder="Nome do médico"
+						class={formErrors.medico ? 'border-red-500' : ''}
 					/>
+					{#if formErrors.medico}
+						<p class="text-sm text-red-500">Informe o médico</p>
+					{/if}
 				</div>
 				<div class="w-full">
-					<DateTimeInput value={formState.data} name="data" label="Data da Consulta" />
-					{#if $errors.data}
-						<p class="text-sm text-red-500">{$errors.data}</p>
+					<Label for="data">
+						Data da Consulta <span class="text-red-500">*</span>
+					</Label>
+					<DateTimeInput
+						value={formState.data}
+						name="data"
+						class={formErrors.data ? 'border-red-500' : ''}
+					/>
+					{#if formErrors.data}
+						<p class="text-sm text-red-500">Selecione uma data</p>
 					{/if}
 				</div>
 				<div class="grid gap-3">

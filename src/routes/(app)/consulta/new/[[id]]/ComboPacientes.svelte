@@ -1,69 +1,89 @@
 <script lang="ts">
-	import Check from 'svelte-radix/Check.svelte';
-	import CaretSort from 'svelte-radix/CaretSort.svelte';
-	import { tick } from 'svelte';
-	import * as Command from '$lib/components/ui/command/index.js';
-	import * as Popover from '$lib/components/ui/popover/index.js';
-	import { Button } from '$lib/components/ui/button/index.js';
-	import { cn } from '$lib/utils.js';
-	import type { Paciente } from '@prisma/client';
-	import Label from '@/components/ui/label/label.svelte';
+	import { Command } from 'cmdk-sv';
+	import { Button } from '@/components/ui/button';
+	import { Input } from '@/components/ui/input';
+	import { Label } from '@/components/ui/label';
+	import * as Popover from '@/components/ui/popover';
+	import { Check, ChevronsUpDown, Search } from 'lucide-svelte';
+	import { cn } from '@/utils';
 
-	export let pacientes: Paciente[];
+	export let pacientes: Array<{
+		id: number;
+		nome: string;
+		nif: string;
+	}>;
 	export let name: string;
 
 	let open = false;
-	let value: number;
+	let value = '';
+	let searchTerm = '';
 
-	$: selectedValue = pacientes.find((f) => f.id === value)?.nome ?? 'Selelecione um paciente';
+	$: filteredPacientes = pacientes.filter(
+		(paciente) =>
+			paciente.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
+			paciente.nif.includes(searchTerm)
+	);
 
-	// We want to refocus the trigger button when the user selects
-	// an item from the list so users can continue navigating the
-	// rest of the form with the keyboard.
-	function closeAndFocusTrigger(triggerId: string) {
+	function selectPaciente(paciente: { id: number; nome: string; nif: string }) {
+		value = paciente.nome;
 		open = false;
-		tick().then(() => {
-			document.getElementById(triggerId)?.focus();
-		});
+
+		// Criar e disparar evento de mudança para o input hidden
+		const input = document.querySelector(`input[name="${name}"]`) as HTMLInputElement;
+		if (input) {
+			input.value = paciente.id.toString();
+			input.dispatchEvent(new Event('change', { bubbles: true }));
+		}
 	}
 </script>
 
-<div class="grid">
-	<Label>Paciente</Label>
-	<Popover.Root bind:open let:ids>
+<div class="grid gap-3">
+	<Label for="paciente">
+		Paciente <span class="text-red-500">*</span>
+	</Label>
+	<input type="hidden" {name} />
+	<Popover.Root bind:open>
 		<Popover.Trigger asChild let:builder>
 			<Button
-				builders={[builder]}
 				variant="outline"
 				role="combobox"
 				aria-expanded={open}
-				class="justify-between"
+				class="w-full justify-between"
+				builders={[builder]}
 			>
-				{selectedValue}
-				<CaretSort class="ml-2 h-4 w-4 shrink-0 opacity-50" />
+				{value || 'Selecione um paciente'}
+				<ChevronsUpDown class="ml-2 h-4 w-4 shrink-0 opacity-50" />
 			</Button>
 		</Popover.Trigger>
-		<Popover.Content class="p-0">
-			<Command.Root>
-				<Command.Input placeholder="Pesquisar Paciente" class="h-9 w-[350px]" />
-				<Command.Empty>Nenhum Paciente encontrado.</Command.Empty>
-				<Command.Group>
-					{#each pacientes as paciente}
+		<Popover.Content class="w-[--width] p-0">
+			<Command.Root class="w-full">
+				<div class="flex items-center border-b px-3">
+					<Search class="mr-2 h-4 w-4 shrink-0 opacity-50" />
+					<Input
+						placeholder="Buscar por nome ou NIF..."
+						bind:value={searchTerm}
+						class="h-11 w-full border-0 bg-transparent p-2 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
+					/>
+				</div>
+				<Command.Empty class="p-6 text-center text-sm">Nenhum paciente encontrado.</Command.Empty>
+				<Command.Group class="max-h-[300px] overflow-auto">
+					{#each filteredPacientes as paciente (paciente.id)}
 						<Command.Item
-							value={paciente.id.toString()}
-							onSelect={(currentValue) => {
-								value = +currentValue;
-								closeAndFocusTrigger(ids.trigger);
-							}}
+							value={paciente.nome}
+							class="flex cursor-pointer items-center px-4 py-2 hover:bg-accent"
+							on:click={() => selectPaciente(paciente)}
 						>
-							<Check class={cn('mr-2 h-4 w-4', value !== paciente.id && 'text-transparent')} />
-							{paciente.id + ' - ' + paciente.nome}
+							<Check
+								class={cn('mr-2 h-4 w-4', value === paciente.nome ? 'opacity-100' : 'opacity-0')}
+							/>
+							<div class="flex flex-col">
+								<span>{paciente.nome}</span>
+								<span class="text-xs text-gray-500">NIF: {paciente.nif}</span>
+							</div>
 						</Command.Item>
 					{/each}
 				</Command.Group>
 			</Command.Root>
 		</Popover.Content>
 	</Popover.Root>
-
-	<input type="hidden" bind:value {name} id={name} />
 </div>
